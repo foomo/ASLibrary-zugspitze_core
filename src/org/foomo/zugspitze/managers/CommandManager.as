@@ -1,0 +1,152 @@
+package org.foomo.zugspitze.managers
+{
+	import org.foomo.zugspitze.commands.ICommand;
+	import org.foomo.zugspitze.core.Singleton;
+
+	/**
+	 * The command manager handles commands.
+	 * It executes them after each other and if possible adds them to the history
+	 */
+	public class CommandManager
+	{
+		//-----------------------------------------------------------------------------------------
+		// ~ Constants
+		//-----------------------------------------------------------------------------------------
+
+		public static const DEFAULT_STACK:String 		= 'applicationStack';
+
+		public static const DEFAULT_STACK_SIZE:Number 	= 50;
+
+		//-----------------------------------------------------------------------------------------
+		// ~ Static variables
+		//-----------------------------------------------------------------------------------------
+
+		/**
+		 *  @private
+		 *  Linker dependency on implementation class.
+		 */
+		private static var _implClassDependency:CommandManagerImpl;
+
+		/**
+		 * @private
+		 */
+		private static var _impl:ICommandManager;
+
+		//-----------------------------------------------------------------------------------------
+		// ~ Singleton instance
+		//-----------------------------------------------------------------------------------------
+
+		/**
+		 * @private
+		 */
+		private static function get impl():ICommandManager
+		{
+			if (!_impl) _impl = ICommandManager(Singleton.getInstance("org.foomo.zugspitze.managers::ICommandManager"));
+			return _impl;
+		}
+
+		/**
+		 * @return ICommandManager
+		 */
+		public static function getInstance():ICommandManager
+		{
+			return impl;
+		}
+
+		//-----------------------------------------------------------------------------------------
+		// ~ Command History
+		//-----------------------------------------------------------------------------------------
+
+		/**
+		 * @param value			history identifier
+		 */
+		public static function set historyName(value:String):void
+		{
+			impl.historyName = value;
+		}
+
+		/**
+		 * @return				history identifier
+		 */
+		public static function get historyName():String
+		{
+			return impl.historyName;
+		}
+
+		/**
+		 * @param value 		undo history size
+		 */
+		public static function set historySize(value:int):void
+		{
+			impl.historySize = value;
+		}
+
+		/**
+		 * @return 				undo history size
+		 */
+		public static function get historySize():int
+		{
+			return impl.historySize;
+		}
+
+		/**
+		 * @return				has undoable command in history
+		 */
+		public static function get undoAble():Boolean
+		{
+			return impl.undoAble;
+		}
+
+		/**
+		 * @return 				has redoable command in history
+		 */
+		public static function get redoAble():Boolean
+		{
+			return impl.redoAble;
+		}
+
+		//-----------------------------------------------------------------------------------------
+		// ~ Public static mehtods
+		//-----------------------------------------------------------------------------------------
+
+		/**
+		 * @param value 			Execute command through queue
+		 */
+		public static function execute(command:ICommand):void
+		{
+			impl.execute(command);
+		}
+
+		/**
+		 * Undo command in history
+		 */
+		public static function undo():void
+		{
+			impl.undo();
+		}
+
+		/**
+		 * Redo command in history
+		 */
+		public static function redo():void
+		{
+			impl.redo();
+		}
+
+		/**
+		 * Add event listner
+		 */
+		public static function addEventListener(type:String, listener:Function, useCapture:Boolean=false, priority:int=0, useWeakReference:Boolean=false):void
+		{
+			impl.addEventListener(type, listener, useCapture, priority, useWeakReference);
+		}
+
+		/**
+		 * Remove event listner
+		 */
+		public static function removeEventListener(type:String, listener:Function, useCapture:Boolean=false):void
+		{
+			impl.removeEventListener(type, listener, useCapture);
+		}
+	}
+}
