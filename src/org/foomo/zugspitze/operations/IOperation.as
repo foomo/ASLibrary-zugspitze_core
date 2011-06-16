@@ -2,12 +2,23 @@ package org.foomo.zugspitze.operations
 {
 	import flash.events.IEventDispatcher;
 
-	[Event(name="operationError", type="org.foomo.zugspitze.events.OperationEvent")]
-	[Event(name="operationComplete", type="org.foomo.zugspitze.events.OperationEvent")]
-
 	public interface IOperation extends IEventDispatcher
 	{
-		function get result():*;
-		function get error():*;
+		/**
+		 * Returns an untyped result
+		 */
+		function get operationResult():*;
+		/**
+		 * Returns an untyped error
+		 */
+		function get operationError():*;
+		/**
+		 * Returns the operation total
+		 */
+		function get total():uint;
+		/**
+		 * Returns the operation progress
+		 */
+		function get progress():uint;
 	}
 }

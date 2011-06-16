@@ -7,8 +7,9 @@ package org.foomo.zugspitze.operations
 
 	[Event(name="operationError", type="org.foomo.zugspitze.events.OperationEvent")]
 	[Event(name="operationComplete", type="org.foomo.zugspitze.events.OperationEvent")]
+	[Event(name="operationProgress", type="org.foomo.zugspitze.events.OperationEvent")]
 
-	public class AbstractOperation extends EventDispatcher implements IOperation
+	public class Operation extends EventDispatcher implements IOperation
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Variabels
@@ -17,21 +18,29 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		protected var _error:*;
+		private var _error:*;
 		/**
 		 *
 		 */
-		protected var _result:*;
+		private var _result:*;
 		/**
 		 *
 		 */
-		protected var _eventClass:Class;
+		private var _total:uint;
+		/**
+		 *
+		 */
+		private var _progress:uint;
+		/**
+		 *
+		 */
+		private var _eventClass:Class;
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function AbstractOperation(eventClass:Class=null)
+		public function Operation(eventClass:Class=null)
 		{
 			this._eventClass = (eventClass) ? eventClass : OperationEvent;
 		}
@@ -43,7 +52,7 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		public function get result():*
+		public function get operationResult():*
 		{
 			return this._result;
 		}
@@ -51,14 +60,40 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		public function get error():*
+		public function get operationError():*
 		{
 			return this._error;
+		}
+
+		/**
+		 *
+		 */
+		public function get total():uint
+		{
+			return this._total;
+		}
+
+		/**
+		 *
+		 */
+		public function get progress():uint
+		{
+			return this._progress;
 		}
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Protected methods
 		//-----------------------------------------------------------------------------------------
+
+		/**
+		 *
+		 */
+		protected function dispatchOperationProgressEvent(total:uint, progress:uint):Boolean
+		{
+			this._total = total;
+			this._progress = progress;
+			return this.dispatchEvent(new this._eventClass(OperationEvent.OPERATION_PROGRESS, this));
+		}
 
 		/**
 		 *

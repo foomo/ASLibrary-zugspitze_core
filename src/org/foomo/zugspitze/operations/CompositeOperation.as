@@ -1,31 +1,22 @@
-package org.foomo.zugspitze.core
+package org.foomo.zugspitze.operations
 {
-	import flash.events.EventDispatcher;
-
 	import org.foomo.zugspitze.events.OperationEvent;
-	import org.foomo.zugspitze.operations.IOperation;
 	import org.foomo.zugspitze.utils.OperationUtils;
 
-	[Event(name="operationError", type="org.foomo.zugspitze.events.OperationEvent")]
-	[Event(name="operationComplete", type="org.foomo.zugspitze.events.OperationEvent")]
-	[Event(name="operationProgress", type="org.foomo.zugspitze.events.OperationEvent")]
-
-	/**
-	 * Zugspitze Model.
-	 */
-	public class ZugspitzeModel extends EventDispatcher
+	public class CompositeOperation extends Operation
 	{
+		//-----------------------------------------------------------------------------------------
+		// ~ Constructor
+		//-----------------------------------------------------------------------------------------
+
+		public function CompositeOperation(eventClass:Class=null)
+		{
+			super(eventClass);
+		}
+
 		//-----------------------------------------------------------------------------------------
 		// ~ Protected methods
 		//-----------------------------------------------------------------------------------------
-
-		protected function setupModel(model:ZugspitzeModel):*
-		{
-			model.addEventListener(OperationEvent.OPERATION_COMPLETE, this.unhandled_operationEventHandler, false, 0, true);
-			model.addEventListener(OperationEvent.OPERATION_PROGRESS, this.unhandled_operationEventHandler, false, 0, true);
-			model.addEventListener(OperationEvent.OPERATION_ERROR, this.unhandled_operationEventHandler, false, 0, true);
-			return model;
-		}
 
 		/**
 		 *

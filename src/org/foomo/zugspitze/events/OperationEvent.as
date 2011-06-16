@@ -11,13 +11,17 @@ package org.foomo.zugspitze.events
 		//-----------------------------------------------------------------------------------------
 
 		public static const OPERATION_COMPLETE:String 	= 'operationComplete';
+		public static const OPERATION_PROGRESS:String 	= 'operationProgress';
 		public static const OPERATION_ERROR:String 		= 'operationError';
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
 		//-----------------------------------------------------------------------------------------
 
-		protected var _operation:IOperation;
+		/**
+		 *
+		 */
+		private var _operation:IOperation;
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
@@ -33,9 +37,44 @@ package org.foomo.zugspitze.events
 		// ~ Public methods
 		//-----------------------------------------------------------------------------------------
 
+		/**
+		 *
+		 */
 		public function get operation():IOperation
 		{
-			return _operation;
+			return this._operation;
+		}
+
+		/**
+		 *
+		 */
+		public function get operationResult():*
+		{
+			return this._operation.operationResult;
+		}
+
+		/**
+		 *
+		 */
+		public function get operationError():*
+		{
+			return this._operation.operationError;
+		}
+
+		/**
+		 *
+		 */
+		public function get total():uint
+		{
+			return this._operation.total;
+		}
+
+		/**
+		 *
+		 */
+		public function get progress():uint
+		{
+			return this._operation.progress;
 		}
 
 		//-----------------------------------------------------------------------------------------
