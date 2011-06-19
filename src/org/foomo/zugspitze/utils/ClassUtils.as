@@ -1,5 +1,6 @@
 package org.foomo.zugspitze.utils
 {
+	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 
 	//[ExcludeClass]
@@ -16,6 +17,32 @@ package org.foomo.zugspitze.utils
 		public static function getQualifiedName(value:*):String
 		{
 			return getQualifiedClassName(value).replace('::', '.');
+		}
+
+		/**
+		 *
+		 */
+		public static function getPackageName(value:*):String
+		{
+			var data:Array = getQualifiedClassName(value).split('::');
+			return data[0];
+		}
+
+		/**
+		 *
+		 */
+		public static function getClass(value:*):Class
+		{
+			return getDefinitionByName(ClassUtils.getQualifiedName(value)) as Class;
+		}
+
+		/**
+		 *
+		 */
+		public static function getClassName(value:*):String
+		{
+			var data:Array = getQualifiedClassName(value).split('::');
+			return data[1];
 		}
 
 		/**
