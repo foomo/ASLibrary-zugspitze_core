@@ -1,14 +1,14 @@
 package org.foomo.zugspitze.operations
 {
 	import flash.events.EventDispatcher;
-	import flash.events.IEventDispatcher;
 
-	import org.foomo.zugspitze.events.OperationEvent;
+	import org.foomo.zugspitze.utils.ClassUtils;
+	import org.foomo.zugspitze.utils.StringUtils;
 
-	[Event(name="operationError", type="org.foomo.zugspitze.events.OperationEvent")]
-	[Event(name="operationComplete", type="org.foomo.zugspitze.events.OperationEvent")]
-	[Event(name="operationProgress", type="org.foomo.zugspitze.events.OperationEvent")]
-
+	/**
+	 * This class should not be used by it self.
+	 * Extend it and define your events and typed result/error.
+	 */
 	public class Operation extends EventDispatcher implements IOperation
 	{
 		//-----------------------------------------------------------------------------------------
@@ -26,11 +26,11 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		private var _total:uint;
+		private var _total:Number;
 		/**
 		 *
 		 */
-		private var _progress:uint;
+		private var _progress:Number;
 		/**
 		 *
 		 */
@@ -40,9 +40,9 @@ package org.foomo.zugspitze.operations
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function Operation(eventClass:Class=null)
+		public function Operation(eventClass:Class)
 		{
-			this._eventClass = (eventClass) ? eventClass : OperationEvent;
+			this._eventClass = eventClass;
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -52,7 +52,7 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		public function get operationResult():*
+		public function get untypedResult():*
 		{
 			return this._result;
 		}
@@ -60,7 +60,7 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		public function get operationError():*
+		public function get untypedError():*
 		{
 			return this._error;
 		}
@@ -68,7 +68,7 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		public function get total():uint
+		public function get total():Number
 		{
 			return this._total;
 		}
@@ -76,7 +76,7 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		public function get progress():uint
+		public function get progress():Number
 		{
 			return this._progress;
 		}
@@ -88,11 +88,11 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		protected function dispatchOperationProgressEvent(total:uint, progress:uint):Boolean
+		protected function dispatchOperationProgressEvent(total:Number, progress:Number):Boolean
 		{
 			this._total = total;
 			this._progress = progress;
-			return this.dispatchEvent(new this._eventClass(OperationEvent.OPERATION_PROGRESS, this));
+			return this.dispatchEvent(new this._eventClass(this.eventClassToEventName() + 'Progress', this.untypedResult, this.untypedError, this.total, this.progress));
 		}
 
 		/**
@@ -101,7 +101,7 @@ package org.foomo.zugspitze.operations
 		protected function dispatchOperationCompleteEvent(result:*=null):Boolean
 		{
 			if (result != null) this._result = result;
-			return this.dispatchEvent(new this._eventClass(OperationEvent.OPERATION_COMPLETE, this));
+			return this.dispatchEvent(new this._eventClass(this.eventClassToEventName() + 'Complete', this.untypedResult, this.untypedError, this.total, this.progress));
 		}
 
 		/**
@@ -110,7 +110,19 @@ package org.foomo.zugspitze.operations
 		protected function dispatchOperationErrorEvent(error:*=null):Boolean
 		{
 			if (error != null) this._error = error;
-			return this.dispatchEvent(new this._eventClass(OperationEvent.OPERATION_ERROR, this));
+			return this.dispatchEvent(new this._eventClass(this.eventClassToEventName() + 'Error', this.untypedResult, this.untypedError, this.total, this.progress));
+		}
+
+		//-----------------------------------------------------------------------------------------
+		// ~ Private methods
+		//-----------------------------------------------------------------------------------------
+
+		/**
+		 *
+		 */
+		private function eventClassToEventName():String
+		{
+			return StringUtils.lcFirst(ClassUtils.getClassName(this._eventClass)).replace('Event', '');
 		}
 	}
 }

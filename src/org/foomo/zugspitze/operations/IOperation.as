@@ -7,18 +7,18 @@ package org.foomo.zugspitze.operations
 		/**
 		 * Returns an untyped result
 		 */
-		function get operationResult():*;
+		function get untypedResult():*;
 		/**
 		 * Returns an untyped error
 		 */
-		function get operationError():*;
+		function get untypedError():*;
 		/**
 		 * Returns the operation total
 		 */
-		function get total():uint;
+		function get total():Number;
 		/**
 		 * Returns the operation progress
 		 */
-		function get progress():uint;
+		function get progress():Number;
 	}
 }
