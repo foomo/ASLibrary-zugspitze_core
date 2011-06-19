@@ -3,17 +3,14 @@ package org.foomo.zugspitze.events
 	import flash.events.Event;
 
 	import org.foomo.zugspitze.operations.IOperation;
+	import org.foomo.zugspitze.utils.ClassUtils;
 
+	/**
+	 * This class should not be used by it's own.
+	 * Extend it and define your own result and error types
+	 */
 	public class OperationEvent extends Event
 	{
-		//-----------------------------------------------------------------------------------------
-		// ~ Constants
-		//-----------------------------------------------------------------------------------------
-
-		public static const OPERATION_COMPLETE:String 	= 'operationComplete';
-		public static const OPERATION_PROGRESS:String 	= 'operationProgress';
-		public static const OPERATION_ERROR:String 		= 'operationError';
-
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
 		//-----------------------------------------------------------------------------------------
@@ -21,15 +18,30 @@ package org.foomo.zugspitze.events
 		/**
 		 *
 		 */
-		private var _operation:IOperation;
+		private var _result:*;
+		/**
+		 *
+		 */
+		private var _error:*;
+		/**
+		 *
+		 */
+		private var _total:Number;
+		/**
+		 *
+		 */
+		private var _progress:Number;
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function OperationEvent(type:String, operation:IOperation)
+		public function OperationEvent(type:String, result:*=null, error:*=null, total:Number=0, progress:Number=0)
 		{
-			this._operation = operation;
+			this._result = result;
+			this._error = error;
+			this._total = total;
+			this._progress = progress;
 			super(type);
 		}
 
@@ -40,41 +52,33 @@ package org.foomo.zugspitze.events
 		/**
 		 *
 		 */
-		public function get operation():IOperation
+		public function get untypedResult():*
 		{
-			return this._operation;
+			return this._result;
 		}
 
 		/**
 		 *
 		 */
-		public function get operationResult():*
+		public function get untypedError():*
 		{
-			return this._operation.operationResult;
+			return this._error;
 		}
 
 		/**
 		 *
 		 */
-		public function get operationError():*
+		public function get total():Number
 		{
-			return this._operation.operationError;
+			return this._total;
 		}
 
 		/**
 		 *
 		 */
-		public function get total():uint
+		public function get progress():Number
 		{
-			return this._operation.total;
-		}
-
-		/**
-		 *
-		 */
-		public function get progress():uint
-		{
-			return this._operation.progress;
+			return this._progress;
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -86,7 +90,8 @@ package org.foomo.zugspitze.events
 		 */
 		override public function clone():Event
 		{
-			return new OperationEvent(this.type, this.operation);
+			var eventClass:Class = ClassUtils.getClass(this);
+			return new eventClass(this.type, this.untypedResult, this.untypedError, this.total, this.progress);
 		}
 
 		/**
@@ -94,7 +99,7 @@ package org.foomo.zugspitze.events
 		 */
 		override public function toString():String
 		{
-			return formatToString('OperationEvent');
+			return formatToString(ClassUtils.getClassName(this), 'result', 'error', 'total', 'progress');
 		}
 	}
 }

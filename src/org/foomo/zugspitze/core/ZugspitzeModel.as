@@ -6,10 +6,6 @@ package org.foomo.zugspitze.core
 	import org.foomo.zugspitze.operations.IOperation;
 	import org.foomo.zugspitze.utils.OperationUtils;
 
-	[Event(name="operationError", type="org.foomo.zugspitze.events.OperationEvent")]
-	[Event(name="operationComplete", type="org.foomo.zugspitze.events.OperationEvent")]
-	[Event(name="operationProgress", type="org.foomo.zugspitze.events.OperationEvent")]
-
 	/**
 	 * Zugspitze Model.
 	 */
@@ -18,14 +14,6 @@ package org.foomo.zugspitze.core
 		//-----------------------------------------------------------------------------------------
 		// ~ Protected methods
 		//-----------------------------------------------------------------------------------------
-
-		protected function setupModel(model:ZugspitzeModel):*
-		{
-			model.addEventListener(OperationEvent.OPERATION_COMPLETE, this.unhandled_operationEventHandler, false, 0, true);
-			model.addEventListener(OperationEvent.OPERATION_PROGRESS, this.unhandled_operationEventHandler, false, 0, true);
-			model.addEventListener(OperationEvent.OPERATION_ERROR, this.unhandled_operationEventHandler, false, 0, true);
-			return model;
-		}
 
 		/**
 		 *
@@ -47,6 +35,7 @@ package org.foomo.zugspitze.core
 		 */
 		protected function unhandled_operationEventHandler(event:OperationEvent):void
 		{
+			// TODO: what to do with unhandled events!?
 			this.dispatchEvent(event);
 		}
 	}
