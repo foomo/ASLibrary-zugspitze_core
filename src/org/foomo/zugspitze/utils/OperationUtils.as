@@ -21,10 +21,14 @@ package org.foomo.zugspitze.utils
 			var complete:Function;
 			var error:Function;
 
+			var errorEvent:String = StringUtils.ucFirst(ClassUtils.getClassName(operation)) + 'Error';
+			var progressEvent:String = StringUtils.ucFirst(ClassUtils.getClassName(operation)) + 'Progress';
+			var completeEvent:String = StringUtils.ucFirst(ClassUtils.getClassName(operation)) + 'Complete';
+
 			unload = function():void {
-				operation.removeEventListener(OperationEvent.OPERATION_PROGRESS, progress);
-				operation.removeEventListener(OperationEvent.OPERATION_COMPLETE, complete);
-				operation.removeEventListener(OperationEvent.OPERATION_ERROR, error);
+				operation.removeEventListener(progressEvent, progress);
+				operation.removeEventListener(completeEvent, complete);
+				operation.removeEventListener(errorEvent, error);
 				ClassUtils.callMethodIfType(operation, IUnload, 'unload');
 			}
 
@@ -42,9 +46,9 @@ package org.foomo.zugspitze.utils
 				unload.call(this);
 			}
 
-			operation.addEventListener(OperationEvent.OPERATION_PROGRESS, progress);
-			operation.addEventListener(OperationEvent.OPERATION_COMPLETE, complete);
-			operation.addEventListener(OperationEvent.OPERATION_ERROR, error);
+			operation.addEventListener(progressEvent, progress);
+			operation.addEventListener(completeEvent, complete);
+			operation.addEventListener(errorEvent, error);
 
 			return operation;
 		}
