@@ -9,9 +9,9 @@ package org.foomo.zugspitze.core
 	[Event(name="operationError", type="org.foomo.zugspitze.events.OperationEvent")]
 	[Event(name="operationComplete", type="org.foomo.zugspitze.events.OperationEvent")]
 	[Event(name="operationProgress", type="org.foomo.zugspitze.events.OperationEvent")]
+	[Event(name="unhandledOperationError", type="org.foomo.zugspitze.events.OperationEvent")]
 	[Event(name="unhandledOperationComplete", type="org.foomo.zugspitze.events.OperationEvent")]
 	[Event(name="unhandledOperationProgress", type="org.foomo.zugspitze.events.OperationEvent")]
-	[Event(name="unhandledOperationError", type="org.foomo.zugspitze.events.OperationEvent")]
 
 	/**
 	 * Zugspitze Model.

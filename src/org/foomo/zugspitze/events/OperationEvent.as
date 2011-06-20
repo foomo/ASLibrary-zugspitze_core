@@ -19,8 +19,8 @@ package org.foomo.zugspitze.events
 		public static const OPERATION_ERROR:String 				= "operationError";
 		public static const OPERATION_COMPLETE:String 			= "operationComplete";
 		public static const OPERATION_PROGRESS:String 			= "operationProgress";
-		public static const UNHANDLED_OPERATION_COMPLETE:String = "unhandledOpperationComplete";
-		public static const UNHANDLED_OPERATION_PROGRESS:String = "unhandledOpperationProgress";
+		public static const UNHANDLED_OPERATION_COMPLETE:String = "unhandledOperationComplete";
+		public static const UNHANDLED_OPERATION_PROGRESS:String = "unhandledOperationProgress";
 		public static const UNHANDLED_OPERATION_ERROR:String 	= "unhandledOperationError";
 
 		//-----------------------------------------------------------------------------------------
