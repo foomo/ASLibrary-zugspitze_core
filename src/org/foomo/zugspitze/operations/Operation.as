@@ -18,23 +18,23 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		private var _error:*;
+		protected var _error:*;
 		/**
 		 *
 		 */
-		private var _result:*;
+		protected var _result:*;
 		/**
 		 *
 		 */
-		private var _total:Number;
+		protected var _total:Number;
 		/**
 		 *
 		 */
-		private var _progress:Number;
+		protected var _progress:Number;
 		/**
 		 *
 		 */
-		private var _eventClass:Class;
+		protected var _eventClass:Class;
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
@@ -113,14 +113,10 @@ package org.foomo.zugspitze.operations
 			return this.dispatchEvent(new this._eventClass(this.eventClassToEventName() + 'Error', this.untypedResult, this.untypedError, this.total, this.progress));
 		}
 
-		//-----------------------------------------------------------------------------------------
-		// ~ Private methods
-		//-----------------------------------------------------------------------------------------
-
 		/**
 		 *
 		 */
-		private function eventClassToEventName():String
+		protected function eventClassToEventName():String
 		{
 			return StringUtils.lcFirst(ClassUtils.getClassName(this._eventClass)).replace('Event', '');
 		}
