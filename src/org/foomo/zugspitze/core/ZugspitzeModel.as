@@ -35,9 +35,9 @@ package org.foomo.zugspitze.core
 		}
 
 		/**
-		 *
+		 * @return ZugspitzeModel
 		 */
-		protected function registerModel(model:ZugspitzeModel):ZugspitzeModel
+		protected function registerModel(model:ZugspitzeModel):*
 		{
 			model.addEventListener(OperationEvent.OPERATION_COMPLETE, this.allOperations_operationEventHandler, false, 0, true);
 			model.addEventListener(OperationEvent.OPERATION_PROGRESS, this.allOperations_operationEventHandler, false, 0, true);
