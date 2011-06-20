@@ -6,11 +6,23 @@ package org.foomo.zugspitze.events
 	import org.foomo.zugspitze.utils.ClassUtils;
 
 	/**
-	 * This class should not be used by it's own.
-	 * Extend it and define your own result and error types
+	 * This class should not be used by it"s own.
+	 * Extend it and define your own result and error types.
+	 * There are some helper constants if you need to propagate operation events without typing them.
 	 */
 	public class OperationEvent extends Event
 	{
+		//-----------------------------------------------------------------------------------------
+		// ~ Constants
+		//-----------------------------------------------------------------------------------------
+
+		public static const OPERATION_ERROR:String 				= "operationError";
+		public static const OPERATION_COMPLETE:String 			= "operationComplete";
+		public static const OPERATION_PROGRESS:String 			= "operationProgress";
+		public static const UNHANDLED_OPERATION_COMPLETE:String = "unhandledOpperationComplete";
+		public static const UNHANDLED_OPERATION_PROGRESS:String = "unhandledOpperationProgress";
+		public static const UNHANDLED_OPERATION_ERROR:String 	= "unhandledOperationError";
+
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
 		//-----------------------------------------------------------------------------------------
@@ -81,6 +93,15 @@ package org.foomo.zugspitze.events
 			return this._progress;
 		}
 
+		/**
+		 * Clone event with different type
+		 */
+		public function cloneWithType(type:String):OperationEvent
+		{
+			var eventClass:Class = ClassUtils.getClass(this);
+			return new eventClass(type, this.untypedResult, this.untypedError, this.total, this.progress);
+		}
+
 		//-----------------------------------------------------------------------------------------
 		// ~ Overriden methods
 		//-----------------------------------------------------------------------------------------
@@ -99,7 +120,7 @@ package org.foomo.zugspitze.events
 		 */
 		override public function toString():String
 		{
-			return formatToString(ClassUtils.getClassName(this), 'result', 'error', 'total', 'progress');
+			return formatToString(ClassUtils.getClassName(this), "result", "error", "total", "progress");
 		}
 	}
 }
