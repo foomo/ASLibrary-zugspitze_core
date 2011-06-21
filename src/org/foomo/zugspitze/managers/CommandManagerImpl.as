@@ -23,7 +23,7 @@ package org.foomo.zugspitze.managers
 	 */
 	[Event(name="commandComplete", type="org.foomo.zugspitze.events.CommandEvent")]
 
-	//[ExcludeClass]
+	[ExcludeClass]
 	public class CommandManagerImpl extends EventDispatcher implements ICommandManager
 	{
 		//-----------------------------------------------------------------------------------------

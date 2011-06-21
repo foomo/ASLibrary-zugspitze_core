@@ -1,6 +1,6 @@
 package org.foomo.zugspitze.utils
 {
-	//[ExcludeClass]
+	[ExcludeClass]
 	public class ArrayUtils
 	{
 		//-----------------------------------------------------------------------------------------

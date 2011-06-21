@@ -2,7 +2,7 @@ package org.foomo.zugspitze.managers
 {
 	import org.foomo.zugspitze.utils.ClassUtils;
 
-	//[ExcludeClass]
+	[ExcludeClass]
 	public class LogManagerImpl implements ILogManager
 	{
 		//-----------------------------------------------------------------------------------------

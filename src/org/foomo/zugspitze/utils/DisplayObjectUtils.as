@@ -3,7 +3,7 @@ package org.foomo.zugspitze.utils
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
 
-	//[ExcludeClass]
+	[ExcludeClass]
 	public class DisplayObjectUtils
 	{
 		//-----------------------------------------------------------------------------------------

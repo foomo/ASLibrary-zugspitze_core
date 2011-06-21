@@ -4,7 +4,7 @@ package org.foomo.zugspitze.utils
 	import org.foomo.zugspitze.events.OperationEvent;
 	import org.foomo.zugspitze.operations.IOperation;
 
-	//[ExcludeClass]
+	[ExcludeClass]
 	public class OperationUtils
 	{
 		//-----------------------------------------------------------------------------------------

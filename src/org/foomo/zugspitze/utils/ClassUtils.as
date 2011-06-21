@@ -3,7 +3,7 @@ package org.foomo.zugspitze.utils
 	import flash.utils.getDefinitionByName;
 	import flash.utils.getQualifiedClassName;
 
-	//[ExcludeClass]
+	[ExcludeClass]
 	public class ClassUtils
 	{
 		//-----------------------------------------------------------------------------------------

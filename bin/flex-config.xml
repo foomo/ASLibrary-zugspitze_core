@@ -56,8 +56,8 @@
       </extensions>
       <!-- compiler.external-library-path: list of SWC files or directories to compile against but to omit from linking-->
       <external-library-path>
-         <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.0/frameworks/libs/player/10.2/playerglobal.swc</path-element>
-         <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.0/frameworks/libs/rpc.swc</path-element>
+         <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/libs/player/10.2/playerglobal.swc</path-element>
+         <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/libs/rpc.swc</path-element>
       </external-library-path>
       <fonts>
          <!-- compiler.fonts.advanced-anti-aliasing: enables advanced anti-aliasing for embedded fonts, which provides greater clarity for small fonts.-->
@@ -130,13 +130,13 @@
       <keep-generated-actionscript>false</keep-generated-actionscript>
       <!-- compiler.library-path: list of SWC files or directories that contain SWC files-->
       <library-path>
-         <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.0/frameworks/libs/authoringsupport.swc</path-element>
-         <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.0/frameworks/libs/flash-integration.swc</path-element>
-         <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.0/frameworks/locale/{locale}</path-element>
-         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.0.308971/flexunitframework/libs/version4libs/Common</path-element>
-         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.0.308971/flexunitframework/libs/version4libs/FlexProject</path-element>
-         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.0.308971/flexunitframework/libs/version4libs/FlexProject_Extended</path-element>
-         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.0.308971/flexunitframework/locale/version4locale</path-element>
+         <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/libs/authoringsupport.swc</path-element>
+         <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/libs/flash-integration.swc</path-element>
+         <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/locale/{locale}</path-element>
+         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.1.313231/flexunitframework/libs/version4libs/Common</path-element>
+         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.1.313231/flexunitframework/libs/version4libs/FlexProject</path-element>
+         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.1.313231/flexunitframework/libs/version4libs/FlexProject_Extended</path-element>
+         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.1.313231/flexunitframework/locale/version4locale</path-element>
       </library-path>
       <!-- compiler.locale: specifies the locale for internationalization-->
       <locale>
@@ -219,8 +219,8 @@
       <strict>true</strict>
       <!-- compiler.theme: list of CSS or SWC files to apply as a theme-->
       <theme>
-         <filename>/Applications/Adobe Flash Builder 4.5/sdks/4.5.0/frameworks/themes/Halo/halo.swc</filename>
-         <filename>/Applications/Adobe Flash Builder 4.5/sdks/4.5.0/frameworks/projects/charts/MXCharts.css</filename>
+         <filename>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/themes/Halo/halo.swc</filename>
+         <filename>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/projects/charts/MXCharts.css</filename>
       </theme>
       <!-- compiler.use-resource-bundle-metadata: determines whether resources bundles are included in the application.-->
       <use-resource-bundle-metadata>false</use-resource-bundle-metadata>

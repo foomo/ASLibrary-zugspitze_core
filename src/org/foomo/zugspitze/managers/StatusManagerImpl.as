@@ -7,12 +7,9 @@ package org.foomo.zugspitze.managers
 	import flash.events.EventDispatcher;
 	import flash.utils.getQualifiedClassName;
 
-	/**
-	 *  @eventType flash.events.Event.CHANGE
-	 */
 	[Event(name="change", type="flash.events.Event")]
 
-	//[ExcludeClass]
+	[ExcludeClass]
 	public class StatusManagerImpl extends EventDispatcher implements IStatusManager
 	{
 		//-----------------------------------------------------------------------------------------
