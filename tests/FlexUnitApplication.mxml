@@ -9,22 +9,21 @@
 	minWidth="955" minHeight="600" creationComplete="onCreationComplete()">
 	<fx:Script>
 		<![CDATA[
-			import org.foomo.zugspitze.utils.ArrayUtilsTest;
 			import org.foomo.zugspitze.ZugspitzeTestSuite;
-
+			
 			public function currentRunTestSuite():Array
 			{
 				var testsToRun:Array = new Array();
 				testsToRun.push(org.foomo.zugspitze.ZugspitzeTestSuite);
 				return testsToRun;
 			}
-
-
+			
+			
 			private function onCreationComplete():void
 			{
-				testRunner.runWithFlexUnit4Runner(currentRunTestSuite(), "zugspitze_testRunner");
+				testRunner.runWithFlexUnit4Runner(currentRunTestSuite(), "zugspitze_coreTests");
 			}
-
+			
 		]]>
 	</fx:Script>
 	<fx:Declarations>
