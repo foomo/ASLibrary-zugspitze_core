@@ -31,13 +31,13 @@ package org.foomo.zugspitze.operations
 		/**
 		 * @return IOperation The executed operation
 		 */
-		protected function runOperation(operation:IOperation, completeHandler:Function=null, errorHandler:Function=null, progressHandler:Function=null):*
+		protected function registerOperation(operation:IOperation, completeHandler:Function=null, errorHandler:Function=null, progressHandler:Function=null):*
 		{
 			if (progressHandler == null) progressHandler = this.unhandledOperations_operationEventHandler;
 			if (completeHandler == null) completeHandler = this.unhandledOperations_operationEventHandler;
 			if (errorHandler == null) errorHandler = this.unhandledOperations_operationEventHandler;
-			OperationUtils.addEventListeners(operation, completeHandler, errorHandler, progressHandler);
-			return OperationUtils.runOperation(operation, allOperations_operationEventHandler, allOperations_operationEventHandler, allOperations_operationEventHandler);
+			OperationUtils.register(operation, completeHandler, errorHandler, progressHandler);
+			return OperationUtils.register(operation, allOperations_operationEventHandler, allOperations_operationEventHandler, allOperations_operationEventHandler, true);
 		}
 
 		//-----------------------------------------------------------------------------------------

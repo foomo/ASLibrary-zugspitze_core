@@ -4,7 +4,6 @@ package org.foomo.zugspitze.utils
 	import org.foomo.zugspitze.events.OperationEvent;
 	import org.foomo.zugspitze.operations.IOperation;
 
-	[ExcludeClass]
 	public class OperationUtils
 	{
 		//-----------------------------------------------------------------------------------------
@@ -12,52 +11,11 @@ package org.foomo.zugspitze.utils
 		//-----------------------------------------------------------------------------------------
 
 		/**
-		 * Add eventlisteners
-		 */
-		public static function addEventListeners(operation:IOperation, completeHandler:Function=null, errorHandler:Function=null, progressHandler:Function=null):IOperation
-		{
-			var unloadMethod:Function;
-			var progressMethod:Function;
-			var completeMethod:Function;
-			var errorMethod:Function;
-
-			var errorEvent:String = StringUtils.lcFirst(ClassUtils.getClassName(operation)) + 'Error';
-			var progressEvent:String = StringUtils.lcFirst(ClassUtils.getClassName(operation)) + 'Progress';
-			var completeEvent:String = StringUtils.lcFirst(ClassUtils.getClassName(operation)) + 'Complete';
-
-			unloadMethod = function():void {
-				operation.removeEventListener(progressEvent, progressMethod);
-				operation.removeEventListener(completeEvent, completeMethod);
-				operation.removeEventListener(errorEvent, errorMethod);
-			}
-
-			progressMethod = function(event:OperationEvent):void {
-				if (progressHandler != null) progressHandler.call(this, event);
-			}
-
-			completeMethod = function(event:OperationEvent):void {
-				if (completeHandler != null) completeHandler.call(this, event);
-				unloadMethod.call(this);
-			}
-
-			errorMethod = function(event:OperationEvent):void {
-				if (errorHandler != null) errorHandler.call(this, event);
-				unloadMethod.call(this);
-			}
-
-			operation.addEventListener(progressEvent, progressMethod);
-			operation.addEventListener(completeEvent, completeMethod);
-			operation.addEventListener(errorEvent, errorMethod);
-
-			return operation;
-		}
-
-		/**
 		 * Calls the unload method after execution
 		 *
 		 * @private
 		 */
-		public static function runOperation(operation:IOperation, completeHandler:Function=null, errorHandler:Function=null, progressHandler:Function=null, unload:Boolean=true):IOperation
+		public static function register(operation:IOperation, completeHandler:Function=null, errorHandler:Function=null, progressHandler:Function=null, unload:Boolean=false):IOperation
 		{
 			var unloadMethod:Function;
 			var progressMethod:Function;
