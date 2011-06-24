@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.foomo.org/zugspitze" xsi:schemaLocation="http://www.foomo.org/zugspitze http://foomo.bestbytes.net/zugspitze/scaffold.xsd">
 	<id>org.foomo.zugspitze.core</id>
-	<type>Core Library</type>
+	<type>Core Library Project</type>
 	<name>Zugspitze Core Library</name>
 	<description>The Zugspitze Core Library.</description>
 	<exclude>true</exclude>
