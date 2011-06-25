@@ -1,6 +1,10 @@
 package org.foomo.zugspitze.core
 {
-	import avmplus.getQualifiedClassName;
+	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
+	import flash.events.Event;
+	import flash.events.EventDispatcher;
+	import flash.utils.getQualifiedClassName;
 
 	import org.foomo.zugspitze.apps.IApplication;
 	import org.foomo.zugspitze.events.ZugspitzeEvent;
@@ -8,11 +12,6 @@ package org.foomo.zugspitze.core
 	import org.foomo.zugspitze.managers.LogManagerImpl;
 	import org.foomo.zugspitze.managers.StatusManagerImpl;
 	import org.foomo.zugspitze.utils.DisplayObjectContainerUtils;
-
-	import flash.display.DisplayObject;
-	import flash.display.DisplayObjectContainer;
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
 	import org.foomo.zugspitze.zugspitze_internal;
 
 	use namespace zugspitze_internal;
