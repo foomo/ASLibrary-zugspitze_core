@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.foomo.org/zugspitze" xsi:schemaLocation="http://www.foomo.org/zugspitze http://foomo.bestbytes.net/zugspitze/scaffold.xsd">
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.foomo.org/zugspitze" xsi:schemaLocation="http://www.foomo.org/zugspitze http://www.foomo.org/foomo/modules/Foomo.Zugspitze/schemas/project.xsd">
 	<id>org.foomo.zugspitze.core</id>
 	<type>Core Library Project</type>
 	<name>Zugspitze Core Library</name>
