@@ -25,7 +25,7 @@ package org.foomo.zugspitze.managers
 
 	/**
 	 * @link www.foomo.org
-	 * @license www.gnu.org/licenses/lgpl.txt
+	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author franklin <franklin@weareinteractive.com>
 	 */
 	internal interface IStatusManager extends IEventDispatcher

@@ -25,7 +25,7 @@ package org.foomo.zugspitze.commands
 	 * A simple command stack where commands can be added or taken from
 	 *
 	 * @link www.foomo.org
-	 * @license www.gnu.org/licenses/lgpl.txt
+	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author franklin <franklin@weareinteractive.com>
 	 * @private
 	 */

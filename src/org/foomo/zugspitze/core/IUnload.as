@@ -18,11 +18,15 @@ package org.foomo.zugspitze.core
 {
 	/**
 	 * @link www.foomo.org
-	 * @license www.gnu.org/licenses/lgpl.txt
+	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author franklin <franklin@weareinteractive.com>
 	 */
 	public interface IUnload
 	{
+		//-----------------------------------------------------------------------------------------
+		// ~ Interface methods
+		//-----------------------------------------------------------------------------------------
+
 		function unload():void
 	}
 }

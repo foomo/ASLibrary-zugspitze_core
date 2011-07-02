@@ -20,7 +20,7 @@ package org.foomo.zugspitze.operations
 
 	/**
 	 * @link www.foomo.org
-	 * @license www.gnu.org/licenses/lgpl.txt
+	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author franklin <franklin@weareinteractive.com>
 	 */
 	public interface IOperation extends IEventDispatcher

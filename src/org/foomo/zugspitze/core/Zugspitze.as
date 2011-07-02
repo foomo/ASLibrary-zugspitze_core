@@ -40,7 +40,7 @@ package org.foomo.zugspitze.core
 	 * Heart of the MCV framework
 	 *
 	 * @link www.foomo.org
-	 * @license www.gnu.org/licenses/lgpl.txt
+	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author franklin <franklin@weareinteractive.com>
 	 */
 	final public class Zugspitze extends EventDispatcher

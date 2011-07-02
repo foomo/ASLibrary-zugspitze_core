@@ -26,7 +26,7 @@ package org.foomo.zugspitze.commands
 	 * if these implement the right interfaces.
 	 *
 	 * @link www.foomo.org
-	 * @license www.gnu.org/licenses/lgpl.txt
+	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author franklin <franklin@weareinteractive.com>
 	 * @private
 	 */
