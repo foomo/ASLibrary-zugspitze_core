@@ -29,7 +29,7 @@ package org.foomo.zugspitze.core
 		// ~ Constants
 		//-----------------------------------------------------------------------------------------
 
-		public static const VERSION:String = 'Beta';
+		public static const VERSION:String = 'alpha';
 
 		// TODO: Find a good place to initalize this
 		Singleton.registerClass('org.foomo.zugspitze.managers::ICommandManager', CommandManagerImpl);
@@ -39,6 +39,12 @@ package org.foomo.zugspitze.core
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
 		//-----------------------------------------------------------------------------------------
+
+		/**
+		 * Verbose Zugspitze information
+		 */
+		public static var verbose:Boolean = true;
+		private static var verbosed:Boolean = false;
 
 		/**
 		 * @private
@@ -96,6 +102,8 @@ package org.foomo.zugspitze.core
 		{
 			this._application = application;
 			DisplayObject(this._application).addEventListener(Event.ENTER_FRAME, this.application_enterFrameHandler, false, 0, true);
+			if (Zugspitze.verbose && !Zugspitze.verbosed) trace('Zugsptize ' + Zugspitze.VERSION);
+			Zugspitze.verbosed = true;
 		}
 
 		//-----------------------------------------------------------------------------------------
