@@ -58,7 +58,7 @@
       <dep id="org.foomo.zugspitze.events:ZugspitzeEvent" />
       <dep id="org.foomo.zugspitze.core:ZugspitzeController" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/core/ZugspitzeView.as" mod="1307698086000" size="2562" optimizedsize="1841">
+    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/core/ZugspitzeView.as" mod="1307698086000" size="2561" optimizedsize="1841">
       <def id="org.foomo.zugspitze.core:ZugspitzeView" />
       <pre id="Object" />
       <dep id="flash.events:Event" />
@@ -213,7 +213,7 @@
       <pre id="Object" />
       <dep id="AS3" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/core/Zugspitze.as" mod="1309616421000" size="4411" optimizedsize="2551">
+    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/core/Zugspitze.as" mod="1309617176000" size="4444" optimizedsize="2583">
       <def id="org.foomo.zugspitze.core:Zugspitze" />
       <pre id="flash.events:EventDispatcher" />
       <dep id="flash.events:Event" />
@@ -271,7 +271,7 @@
       <dep id="AS3" />
       <dep id="flash.display:DisplayObject" />
     </script>
-    <script name="_bc9c3945b4653cbe5f6ffb1c84d42cf09f4500d551f697a754e008b307ed8c31_flash_display_Sprite.as" mod="1309616426445" size="1095" optimizedsize="562">
+    <script name="_bc9c3945b4653cbe5f6ffb1c84d42cf09f4500d551f697a754e008b307ed8c31_flash_display_Sprite.as" mod="1309618129639" size="1095" optimizedsize="562">
       <def id="_bc9c3945b4653cbe5f6ffb1c84d42cf09f4500d551f697a754e008b307ed8c31_flash_display_Sprite" />
       <pre id="flash.display:Sprite" />
       <dep id="flash.system:Security" />

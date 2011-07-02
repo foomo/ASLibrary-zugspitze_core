@@ -1,33 +1,46 @@
+/*
+ * This file is part of the foomo Opensource Framework.
+ *
+ * The foomo Opensource Framework is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License as
+ * published  by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * The foomo Opensource Framework is distributed in the hope that it will
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with
+ * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.foomo.zugspitze.core
 {
-	//[ExcludeClass]
+	[ExcludeClass]
+	
+	/**
+	 * @link www.foomo.org
+	 * @license www.gnu.org/licenses/lgpl.txt
+	 * @author franklin <franklin@weareinteractive.com>
+	 * @see mx.core.Singleton
+	 */
 	public class Singleton
 	{
-		//--------------------------------------------------------------------------
-		//  Class variables
-		//--------------------------------------------------------------------------
+		//-----------------------------------------------------------------------------------------
+		// ~ Variables
+		//-----------------------------------------------------------------------------------------
 
 		/**
 		 *  @private
-		 *  A map of fully-qualified interface names,
-		 *  such as "mx.managers::IPopUpManager",
-		 *  to implementation classes which produce singleton instances,
-		 *  such as mx.managers.PopUpManagerImpl.
 		 */
 		private static var classMap:Object = {};
 
-		//--------------------------------------------------------------------------
-		//
-		//  Class methods
-		//
-		//--------------------------------------------------------------------------
+		//-----------------------------------------------------------------------------------------
+		// ~ Public static methods
+		//-----------------------------------------------------------------------------------------
 
 		/**
 		 *  @private
-		 *  Adds an interface-name-to-implementation-class mapping to the registry,
-		 *  if a class hasn't already been registered for the specified interface.
-		 *  The class must implement a getInstance() method which returns
-		 *  its singleton instance.
 		 */
 		public static function registerClass(interfaceName:String, clazz:Class):void
 		{
@@ -37,11 +50,6 @@ package org.foomo.zugspitze.core
 
 		/**
 		 *  @private
-		 *  Returns the implementation class registered for the specified
-		 *  interface, or null if no class has been registered for that interface.
-		 *
-		 *  This method should not be called at static initialization time,
-		 *  because the factory class may not have called registerClass() yet.
 		 */
 		public static function getClass(interfaceName:String):Class
 		{
@@ -50,13 +58,6 @@ package org.foomo.zugspitze.core
 
 		/**
 		 *  @private
-		 *  Returns the singleton instance of the implementation class
-		 *  that was registered for the specified interface,
-		 *  by looking up the class in the registry
-		 *  and calling its getInstance() method.
-		 *
-		 *  This method should not be called at static initialization time,
-		 *  because the factory class may not have called registerClass() yet.
 		 */
 		public static function getInstance(interfaceName:String):Object
 		{
