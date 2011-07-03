@@ -16,8 +16,8 @@
  */
 package org.foomo.zugspitze.managers
 {
+	import org.foomo.flash.core.Singleton;
 	import org.foomo.zugspitze.commands.ICommand;
-	import org.foomo.zugspitze.core.Singleton;
 
 	/**
 	 * The command manager handles commands.
@@ -30,22 +30,23 @@ package org.foomo.zugspitze.managers
 	public class CommandManager
 	{
 		//-----------------------------------------------------------------------------------------
+		// ~ Static initialization
+		//-----------------------------------------------------------------------------------------
+
+		{
+			Singleton.registerClass('org.foomo.zugspitze.managers::ICommandManager', CommandManagerImpl);
+		}
+
+		//-----------------------------------------------------------------------------------------
 		// ~ Constants
 		//-----------------------------------------------------------------------------------------
 
-		public static const DEFAULT_STACK:String 		= 'applicationStack';
-
-		public static const DEFAULT_STACK_SIZE:Number 	= 50;
+		public static const DEFAULT_STACK:String 		= 'defaultStack';
+		public static const DEFAULT_STACK_SIZE:Number 	= 10;
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Static variables
 		//-----------------------------------------------------------------------------------------
-
-		/**
-		 *  @private
-		 *  Linker dependency on implementation class.
-		 */
-		private static var _implClassDependency:CommandManagerImpl;
 
 		/**
 		 * @private

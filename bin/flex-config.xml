@@ -133,10 +133,7 @@
          <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/libs/authoringsupport.swc</path-element>
          <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/libs/flash-integration.swc</path-element>
          <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/locale/{locale}</path-element>
-         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.1.313231/flexunitframework/libs/version4libs/Common</path-element>
-         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.1.313231/flexunitframework/libs/version4libs/FlexProject</path-element>
-         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.1.313231/flexunitframework/libs/version4libs/FlexProject_Extended</path-element>
-         <path-element>/Applications/Adobe Flash Builder 4.5/eclipse/plugins/com.adobe.flexbuilder.flexunit_4.5.1.313231/flexunitframework/locale/version4locale</path-element>
+         <path-element>/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc</path-element>
       </library-path>
       <!-- compiler.locale: specifies the locale for internationalization-->
       <locale>

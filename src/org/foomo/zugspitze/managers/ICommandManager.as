@@ -20,21 +20,15 @@ package org.foomo.zugspitze.managers
 
 	import flash.events.IEventDispatcher;
 
-	/**
-	 *  @eventType org.foomo.zugspitze.events.CommandEvent.COMMAND_ERROR
-	 */
 	[Event(name="commandError", type="org.foomo.zugspitze.events.CommandEvent")]
-	/**
-	 *  @eventType org.foomo.zugspitze.events.CommandEvent.COMMAND_COMPLETE
-	 */
 	[Event(name="commandComplete", type="org.foomo.zugspitze.events.CommandEvent")]
 
 	/**
 	 * @link www.foomo.org
-	 * @license www.gnu.org/licenses/lgpl.txt
+	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author franklin <franklin@weareinteractive.com>
 	 */
-	internal interface ICommandManager extends IEventDispatcher
+	public interface ICommandManager extends IEventDispatcher
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Singleton initalization

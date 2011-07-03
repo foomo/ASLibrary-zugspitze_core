@@ -16,16 +16,18 @@
  */
 package org.foomo.zugspitze.utils
 {
-	import org.foomo.zugspitze.core.IUnload;
+	import org.foomo.flash.core.IUnload;
 	import org.foomo.zugspitze.events.OperationEvent;
 	import org.foomo.zugspitze.operations.IOperation;
+	import org.foomo.flash.utils.ClassUtil;
+	import org.foomo.flash.utils.StringUtil;
 
 	/**
 	 * @link    http://www.foomo.org
 	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author  franklin <franklin@weareinteractive.com>
 	 */
-	public class OperationUtils
+	public class OperationUtil
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Public static methods
@@ -43,15 +45,15 @@ package org.foomo.zugspitze.utils
 			var completeMethod:Function;
 			var errorMethod:Function;
 
-			var errorEvent:String = StringUtils.lcFirst(ClassUtils.getClassName(operation)) + 'Error';
-			var progressEvent:String = StringUtils.lcFirst(ClassUtils.getClassName(operation)) + 'Progress';
-			var completeEvent:String = StringUtils.lcFirst(ClassUtils.getClassName(operation)) + 'Complete';
+			var errorEvent:String = StringUtil.lcFirst(ClassUtil.getClassName(operation)) + 'Error';
+			var progressEvent:String = StringUtil.lcFirst(ClassUtil.getClassName(operation)) + 'Progress';
+			var completeEvent:String = StringUtil.lcFirst(ClassUtil.getClassName(operation)) + 'Complete';
 
 			unloadMethod = function():void {
 				operation.removeEventListener(progressEvent, progressMethod);
 				operation.removeEventListener(completeEvent, completeMethod);
 				operation.removeEventListener(errorEvent, errorMethod);
-				if (unload) ClassUtils.callMethodIfType(operation, IUnload, 'unload');
+				if (unload) ClassUtil.callMethodIfType(operation, IUnload, 'unload');
 			}
 
 			progressMethod = function(event:OperationEvent):void {

@@ -16,8 +16,8 @@
  */
 package org.foomo.zugspitze.commands
 {
-	import org.foomo.zugspitze.core.IUnload;
-	import org.foomo.zugspitze.utils.ClassUtils;
+	import org.foomo.flash.core.IUnload;
+	import org.foomo.flash.utils.ClassUtil;
 
 	[ExcludeClass]
 
@@ -25,7 +25,7 @@ package org.foomo.zugspitze.commands
 	 * A simple command queue where commands can be added or taken from
 	 *
 	 * @link www.foomo.org
-	 * @license www.gnu.org/licenses/lgpl.txt
+	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author franklin <franklin@weareinteractive.com>
 	 * @private
 	 */
@@ -58,7 +58,7 @@ package org.foomo.zugspitze.commands
 
 		public function clear():void
 		{
-			for each (var command:ICommand in this._commands) ClassUtils.callMethodIfType(command, IUnload, 'unload');
+			for each (var command:ICommand in this._commands) ClassUtil.callMethodIfType(command, IUnload, 'unload');
 			this._commands = new Array;
 		}
 

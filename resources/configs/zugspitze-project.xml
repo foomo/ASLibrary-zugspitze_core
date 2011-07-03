@@ -6,6 +6,6 @@
 	<description>The Zugspitze Core Library.</description>
 	<exclude>true</exclude>
 	<dependencies>
-		<id>org.foomo.zugspitze.core</id>
+		<id>org.foomo.flash</id>
 	</dependencies>
 </config>

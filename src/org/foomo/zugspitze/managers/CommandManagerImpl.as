@@ -26,17 +26,18 @@ package org.foomo.zugspitze.managers
 	import org.foomo.zugspitze.commands.ICommand;
 	import org.foomo.zugspitze.commands.IRedoableCommand;
 	import org.foomo.zugspitze.commands.IUndoableCommand;
-	import org.foomo.zugspitze.core.IUnload;
+	import org.foomo.flash.core.IUnload;
 	import org.foomo.zugspitze.events.CommandEvent;
-	import org.foomo.zugspitze.utils.ClassUtils;
+	import org.foomo.flash.utils.ClassUtil;
+	import org.foomo.flash.managers.LogManager;
 
 	[Event(name="commandError", type="org.foomo.zugspitze.events.CommandEvent")]
 	[Event(name="commandComplete", type="org.foomo.zugspitze.events.CommandEvent")]
-	[ExcludeClass]
-	
+	//[ExcludeClass]
+
 	/**
 	 * @link www.foomo.org
-	 * @license www.gnu.org/licenses/lgpl.txt
+	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author franklin <franklin@weareinteractive.com>
 	 */
 	public class CommandManagerImpl extends EventDispatcher implements ICommandManager
@@ -355,7 +356,7 @@ package org.foomo.zugspitze.managers
 			this._pendingCommand.removeEventListener(CommandEvent.COMMAND_COMPLETE, this.onRedoCommand);
 			this._pendingCommand.removeEventListener(CommandEvent.COMMAND_COMPLETE, this.onExecuteCommand);
 			this._pendingCommand.removeEventListener(CommandEvent.COMMAND_ERROR, this.commandErrorEventHandler);
-			ClassUtils.callMethodIfType(this._pendingCommand, IUnload, 'unload');
+			ClassUtil.callMethodIfType(this._pendingCommand, IUnload, 'unload');
 			this._pendingCommand = null;
 			this._commandHistory.clear();
 			this._commandQueue.clear();

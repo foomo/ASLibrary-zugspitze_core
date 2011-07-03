@@ -18,7 +18,7 @@ package org.foomo.zugspitze.core
 {
 	import org.foomo.zugspitze.apps.IApplication;
 	import org.foomo.zugspitze.events.ZugspitzeEvent;
-	import org.foomo.zugspitze.utils.DisplayObjectUtils;
+	import org.foomo.flash.utils.DisplayObjectUtil;
 
 	import flash.display.DisplayObject;
 	import flash.events.Event;
@@ -46,7 +46,7 @@ package org.foomo.zugspitze.core
 		 */
 		public static function getApplication(viewComposite:DisplayObject):IApplication
 		{
-			return DisplayObjectUtils.getParentByClass(viewComposite, IApplication) as IApplication;
+			return DisplayObjectUtil.getParentByClass(viewComposite, IApplication) as IApplication;
 		}
 
 		/**

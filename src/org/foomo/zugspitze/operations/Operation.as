@@ -18,8 +18,8 @@ package org.foomo.zugspitze.operations
 {
 	import flash.events.EventDispatcher;
 
-	import org.foomo.zugspitze.utils.ClassUtils;
-	import org.foomo.zugspitze.utils.StringUtils;
+	import org.foomo.flash.utils.ClassUtil;
+	import org.foomo.flash.utils.StringUtil;
 
 	/**
 	 * This class should not be used by it self.
@@ -138,7 +138,7 @@ package org.foomo.zugspitze.operations
 		 */
 		protected function eventClassToEventName():String
 		{
-			return StringUtils.lcFirst(ClassUtils.getClassName(this._eventClass)).replace('Event', '');
+			return StringUtil.lcFirst(ClassUtil.getClassName(this._eventClass)).replace('Event', '');
 		}
 	}
 }
