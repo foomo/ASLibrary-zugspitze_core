@@ -16,16 +16,17 @@
  */
 package org.foomo.zugspitze.managers
 {
-	import org.foomo.zugspitze.utils.ArrayUtils;
-	import org.foomo.zugspitze.utils.ClassUtils;
+	import org.foomo.flash.utils.ArrayUtil;
+	import org.foomo.flash.utils.ClassUtil;
 
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.utils.getQualifiedClassName;
+	import org.foomo.flash.managers.LogManager;
 
 	[Event(name="change", type="flash.events.Event")]
-	[ExcludeClass]
-	
+	//[ExcludeClass]
+
 	/**
 	 * @link www.foomo.org
 	 * @license http://www.gnu.org/licenses/lgpl.txt
@@ -106,7 +107,7 @@ package org.foomo.zugspitze.managers
 		 */
 		public function setBusyStatus(instance:Object):void
 		{
-			this._stack.push(ClassUtils.getQualifiedName(instance));
+			this._stack.push(ClassUtil.getQualifiedName(instance));
 			if (this._busy) return;
 			this._busy = true;
 			this.dispatchEvent(new Event(Event.CHANGE));
@@ -121,8 +122,8 @@ package org.foomo.zugspitze.managers
 		{
 			if (this._stack.length == 0) return;
 
-			var aliasName:String 	= ClassUtils.getQualifiedName(instance);
-			var itemIndex:int 		= ArrayUtils.getItemIndex(aliasName, this._stack);
+			var aliasName:String 	= ClassUtil.getQualifiedName(instance);
+			var itemIndex:int 		= ArrayUtil.getItemIndex(aliasName, this._stack);
 
 			if (itemIndex < 0) {
 				if (LogManager.isError()) LogManager.error(this, 'Instance not found in stack');

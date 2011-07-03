@@ -16,8 +16,8 @@
  */
 package org.foomo.zugspitze.commands
 {
-	import org.foomo.zugspitze.core.IUnload;
-	import org.foomo.zugspitze.utils.ClassUtils;
+	import org.foomo.flash.core.IUnload;
+	import org.foomo.flash.utils.ClassUtil;
 
 	[ExcludeClass]
 
@@ -58,7 +58,7 @@ package org.foomo.zugspitze.commands
 
 		public function clear():void
 		{
-			for each (var command:ICommand in this._commands) ClassUtils.callMethodIfType(command, IUnload, 'unload');
+			for each (var command:ICommand in this._commands) ClassUtil.callMethodIfType(command, IUnload, 'unload');
 			this._commands = new Array;
 		}
 

@@ -16,9 +16,9 @@
  */
 package org.foomo.zugspitze.managers
 {
-	import org.foomo.zugspitze.core.Singleton;
-
 	import flash.events.EventDispatcher;
+
+	import org.foomo.flash.core.Singleton;
 
 	/**
 	 *  @eventType flash.events.Event.CHANGE
@@ -33,14 +33,14 @@ package org.foomo.zugspitze.managers
 	public class StatusManager extends EventDispatcher
 	{
 		//-----------------------------------------------------------------------------------------
-		// ~ Static Variables
+		// ~ Static initialization
 		//-----------------------------------------------------------------------------------------
 
-		/**
-		 *  @private
-		 *  Linker dependency on implementation class.
-		 */
-		private static var _implClassDependency:StatusManagerImpl
+		Singleton.registerClass('org.foomo.zugspitze.managers::IStatusManager', StatusManagerImpl);
+
+		//-----------------------------------------------------------------------------------------
+		// ~ Static Variables
+		//-----------------------------------------------------------------------------------------
 
 		/**
 		 * @private

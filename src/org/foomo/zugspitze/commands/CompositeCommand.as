@@ -18,10 +18,10 @@ package org.foomo.zugspitze.commands
 {
 	import flash.utils.getQualifiedClassName;
 
-	import org.foomo.zugspitze.core.IUnload;
+	import org.foomo.flash.core.IUnload;
 	import org.foomo.zugspitze.events.CommandEvent;
-	import org.foomo.zugspitze.managers.LogManager;
-	import org.foomo.zugspitze.utils.ClassUtils;
+	import org.foomo.flash.managers.LogManager;
+	import org.foomo.flash.utils.ClassUtil;
 
 	/**
 	 * Executes several commands in a closed sequence.
@@ -71,10 +71,10 @@ package org.foomo.zugspitze.commands
 		{
 			var cmd:ICommand;
 
-			for each (cmd in this._commandQueue) ClassUtils.callMethodIfType(cmd, IUnload, 'unload');
+			for each (cmd in this._commandQueue) ClassUtil.callMethodIfType(cmd, IUnload, 'unload');
 			this._commandQueue = null;
 
-			for each (cmd in this._executedCommands) ClassUtils.callMethodIfType(cmd, IUnload, 'unload');
+			for each (cmd in this._executedCommands) ClassUtil.callMethodIfType(cmd, IUnload, 'unload');
 			this._executedCommands = null;
 		}
 

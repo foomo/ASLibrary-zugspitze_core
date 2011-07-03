@@ -19,7 +19,7 @@ package org.foomo.zugspitze.events
 	import flash.events.Event;
 
 	import org.foomo.zugspitze.operations.IOperation;
-	import org.foomo.zugspitze.utils.ClassUtils;
+	import org.foomo.flash.utils.ClassUtil;
 
 	/**
 	 * This class should not be used by it"s own.
@@ -118,7 +118,7 @@ package org.foomo.zugspitze.events
 		 */
 		public function cloneWithType(type:String):OperationEvent
 		{
-			var eventClass:Class = ClassUtils.getClass(this);
+			var eventClass:Class = ClassUtil.getClass(this);
 			return new eventClass(type, this.untypedResult, this.untypedError, this.total, this.progress);
 		}
 
@@ -131,7 +131,7 @@ package org.foomo.zugspitze.events
 		 */
 		override public function clone():Event
 		{
-			var eventClass:Class = ClassUtils.getClass(this);
+			var eventClass:Class = ClassUtil.getClass(this);
 			return new eventClass(this.type, this.untypedResult, this.untypedError, this.total, this.progress);
 		}
 
@@ -140,7 +140,7 @@ package org.foomo.zugspitze.events
 		 */
 		override public function toString():String
 		{
-			return formatToString(ClassUtils.getClassName(this), "result", "error", "total", "progress");
+			return formatToString(ClassUtil.getClassName(this), "result", "error", "total", "progress");
 		}
 	}
 }

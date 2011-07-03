@@ -20,7 +20,7 @@ package org.foomo.zugspitze.core
 
 	import org.foomo.zugspitze.events.OperationEvent;
 	import org.foomo.zugspitze.operations.IOperation;
-	import org.foomo.zugspitze.utils.OperationUtils;
+	import org.foomo.zugspitze.utils.OperationUtil;
 
 	[Event(name="operationError", type="org.foomo.zugspitze.events.OperationEvent")]
 	[Event(name="operationComplete", type="org.foomo.zugspitze.events.OperationEvent")]
@@ -50,8 +50,8 @@ package org.foomo.zugspitze.core
 			if (progressHandler == null) progressHandler = this.unhandledOperations_operationEventHandler;
 			if (completeHandler == null) completeHandler = this.unhandledOperations_operationEventHandler;
 			if (errorHandler == null) errorHandler = this.unhandledOperations_operationEventHandler;
-			OperationUtils.register(operation, completeHandler, errorHandler, progressHandler);
-			return OperationUtils.register(operation, this.allOperations_operationEventHandler, this.allOperations_operationEventHandler, this.allOperations_operationEventHandler, true);
+			OperationUtil.register(operation, completeHandler, errorHandler, progressHandler);
+			return OperationUtil.register(operation, this.allOperations_operationEventHandler, this.allOperations_operationEventHandler, this.allOperations_operationEventHandler, true);
 		}
 
 		/**
@@ -77,7 +77,7 @@ package org.foomo.zugspitze.core
 		 */
 		protected function unhandledOperations_operationEventHandler(event:OperationEvent):void
 		{
-			this.dispatchEvent(OperationUtils.cloneToUnhandledOperationEvent(event));
+			this.dispatchEvent(OperationUtil.cloneToUnhandledOperationEvent(event));
 		}
 
 		/**
@@ -85,7 +85,7 @@ package org.foomo.zugspitze.core
 		 */
 		protected function allOperations_operationEventHandler(event:OperationEvent):void
 		{
-			this.dispatchEvent(OperationUtils.cloneToOperationEvent(event));
+			this.dispatchEvent(OperationUtil.cloneToOperationEvent(event));
 		}
 	}
 }

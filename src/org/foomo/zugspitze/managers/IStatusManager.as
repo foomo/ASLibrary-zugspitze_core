@@ -18,9 +18,6 @@ package org.foomo.zugspitze.managers
 {
 	import flash.events.IEventDispatcher;
 
-	/**
-	 *  @eventType flash.events.Event.CHANGE
-	 */
 	[Event(name="change", type="flash.events.Event")]
 
 	/**
@@ -28,7 +25,7 @@ package org.foomo.zugspitze.managers
 	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author franklin <franklin@weareinteractive.com>
 	 */
-	internal interface IStatusManager extends IEventDispatcher
+	public interface IStatusManager extends IEventDispatcher
 	{
 		/**
 		 * Returns current request stack

@@ -22,12 +22,14 @@ package org.foomo.zugspitze.core
 	import flash.events.EventDispatcher;
 	import flash.utils.getQualifiedClassName;
 
+	import org.foomo.flash.core.Singleton;
+	import org.foomo.flash.managers.LogManager;
+	import org.foomo.flash.managers.LogManagerImpl;
+	import org.foomo.flash.utils.DisplayObjectContainerUtil;
 	import org.foomo.zugspitze.apps.IApplication;
 	import org.foomo.zugspitze.events.ZugspitzeEvent;
 	import org.foomo.zugspitze.managers.CommandManagerImpl;
-	import org.foomo.zugspitze.managers.LogManagerImpl;
 	import org.foomo.zugspitze.managers.StatusManagerImpl;
-	import org.foomo.zugspitze.utils.DisplayObjectContainerUtils;
 	import org.foomo.zugspitze.zugspitze_internal;
 
 	use namespace zugspitze_internal;
@@ -46,25 +48,23 @@ package org.foomo.zugspitze.core
 	final public class Zugspitze extends EventDispatcher
 	{
 		//-----------------------------------------------------------------------------------------
+		// ~ Static initialization
+		//-----------------------------------------------------------------------------------------
+
+		private static const ZUGSPITZE_INFO:Object = new Object
+		{
+			if (LogManager.isInfo()) trace('\n      ../\\\n   ../    |     ZUGSPITZE V.' + Zugspitze.VERSION + '\n  /        \\    www.foomo.org/zugspitze\n\n');
+		}
+
+		//-----------------------------------------------------------------------------------------
 		// ~ Constants
 		//-----------------------------------------------------------------------------------------
 
-		public static const VERSION:String = 'alpha';
-
-		// TODO: Find a good place to initalize this
-		Singleton.registerClass('org.foomo.zugspitze.managers::ICommandManager', CommandManagerImpl);
-		Singleton.registerClass('org.foomo.zugspitze.managers::IStatusManager', StatusManagerImpl);
-		Singleton.registerClass('org.foomo.zugspitze.managers::ILogManager', LogManagerImpl);
+		public static const VERSION:String = 'ALPHA';
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
 		//-----------------------------------------------------------------------------------------
-
-		/**
-		 * Verbose Zugspitze information
-		 */
-		public static var verbose:Boolean = true;
-		private static var verbosed:Boolean = false;
 
 		/**
 		 * @private
@@ -121,9 +121,7 @@ package org.foomo.zugspitze.core
 		public function Zugspitze(application:IApplication)
 		{
 			this._application = application;
-			DisplayObject(this._application).addEventListener(Event.ENTER_FRAME, this.application_enterFrameHandler, false, 0, true);
-			if (Zugspitze.verbose && !Zugspitze.verbosed) trace('Zugspitze :: Version ' + Zugspitze.VERSION + ' :: www.foomo.org');
-			Zugspitze.verbosed = true;
+			DisplayObject(this._application).addEventListener(Event.FRAME_CONSTRUCTED, this.application_frameConstructedHandler, false, 0, true);
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -228,14 +226,14 @@ package org.foomo.zugspitze.core
 		{
 			if (this._view == value) return
 			if (this._view) {
-				DisplayObjectContainerUtils.removeChild(this._view, DisplayObjectContainer(this._application));
+				DisplayObjectContainerUtil.removeChild(this._view, DisplayObjectContainer(this._application));
 				this._view.dispatchEvent(new ZugspitzeEvent(ZugspitzeEvent.ZUGSPITZE_VIEW_REMOVE));
 			}
 			this._view = value;
 			if (this._view) {
 				if (!this._view.hasOwnProperty('application')) throw new Error('Zugspitze view "' + getQualifiedClassName(this._view) + '" does not contain application var!')
 				this._view['application'] = this._application;
-				DisplayObjectContainerUtils.addChild(this._view, DisplayObjectContainer(this._application));
+				DisplayObjectContainerUtil.addChild(this._view, DisplayObjectContainer(this._application));
 				this._view.dispatchEvent(new ZugspitzeEvent(ZugspitzeEvent.ZUGSPITZE_VIEW_ADD));
 			}
 			this.dispatchEvent(new ZugspitzeEvent(ZugspitzeEvent.ZUGSPITZE_VIEW_CHANGED));
@@ -277,7 +275,7 @@ package org.foomo.zugspitze.core
 		/**
 		 *
 		 */
-		private function application_enterFrameHandler(event:Event):void
+		private function application_frameConstructedHandler(event:Event):void
 		{
 			if (this._invalidProperties) {
 				this.commitProperties();

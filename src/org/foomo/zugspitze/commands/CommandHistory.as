@@ -16,8 +16,8 @@
  */
 package org.foomo.zugspitze.commands
 {
-	import org.foomo.zugspitze.core.IUnload;
-	import org.foomo.zugspitze.utils.ClassUtils;
+	import org.foomo.flash.core.IUnload;
+	import org.foomo.flash.utils.ClassUtil;
 
 	[ExcludeClass]
 
@@ -165,7 +165,7 @@ package org.foomo.zugspitze.commands
 			if (value is IUndoableCommand) {
 				this.currentStack.put(value);
 			} else {
-				ClassUtils.callMethodIfType(value, IUnload, 'unload');
+				ClassUtil.callMethodIfType(value, IUnload, 'unload');
 				this.currentStack.reset();
 			}
 		}
