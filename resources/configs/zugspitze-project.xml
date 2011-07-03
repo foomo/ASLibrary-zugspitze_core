@@ -7,6 +7,5 @@
 	<exclude>true</exclude>
 	<dependencies>
 		<id>org.foomo.flash</id>
-		<id>org.foomo.zugspitze.core</id>
 	</dependencies>
 </config>
