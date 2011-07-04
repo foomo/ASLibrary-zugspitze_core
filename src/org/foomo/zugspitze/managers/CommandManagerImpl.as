@@ -26,10 +26,10 @@ package org.foomo.zugspitze.managers
 	import org.foomo.zugspitze.commands.ICommand;
 	import org.foomo.zugspitze.commands.IRedoableCommand;
 	import org.foomo.zugspitze.commands.IUndoableCommand;
-	import org.foomo.flash.core.IUnload;
+	import org.foomo.core.IUnload;
 	import org.foomo.zugspitze.events.CommandEvent;
-	import org.foomo.flash.utils.ClassUtil;
-	import org.foomo.flash.managers.LogManager;
+	import org.foomo.utils.ClassUtil;
+	import org.foomo.managers.LogManager;
 
 	[Event(name="commandError", type="org.foomo.zugspitze.events.CommandEvent")]
 	[Event(name="commandComplete", type="org.foomo.zugspitze.events.CommandEvent")]

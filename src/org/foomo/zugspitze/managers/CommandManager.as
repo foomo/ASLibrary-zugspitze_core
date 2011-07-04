@@ -16,7 +16,7 @@
  */
 package org.foomo.zugspitze.managers
 {
-	import org.foomo.flash.core.Singleton;
+	import org.foomo.core.Singleton;
 	import org.foomo.zugspitze.commands.ICommand;
 
 	/**

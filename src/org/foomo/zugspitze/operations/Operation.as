@@ -18,8 +18,8 @@ package org.foomo.zugspitze.operations
 {
 	import flash.events.EventDispatcher;
 
-	import org.foomo.flash.utils.ClassUtil;
-	import org.foomo.flash.utils.StringUtil;
+	import org.foomo.utils.ClassUtil;
+	import org.foomo.utils.StringUtil;
 
 	/**
 	 * This class should not be used by it self.

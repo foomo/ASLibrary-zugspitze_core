@@ -14,10 +14,8 @@
  * You should have received a copy of the GNU Lesser General Public License along with
  * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.foomo.zugspitze.apps
+package org.foomo.zugspitze.core
 {
-	import org.foomo.zugspitze.core.ZugspitzeController;
-	import org.foomo.zugspitze.core.ZugspitzeModel;
 
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;

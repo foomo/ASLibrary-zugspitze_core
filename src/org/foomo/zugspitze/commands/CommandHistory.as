@@ -16,8 +16,8 @@
  */
 package org.foomo.zugspitze.commands
 {
-	import org.foomo.flash.core.IUnload;
-	import org.foomo.flash.utils.ClassUtil;
+	import org.foomo.core.IUnload;
+	import org.foomo.utils.ClassUtil;
 
 	[ExcludeClass]
 

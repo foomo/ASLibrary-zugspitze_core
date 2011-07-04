@@ -18,7 +18,7 @@ package org.foomo.zugspitze.managers
 {
 	import flash.events.EventDispatcher;
 
-	import org.foomo.flash.core.Singleton;
+	import org.foomo.core.Singleton;
 
 	/**
 	 *  @eventType flash.events.Event.CHANGE

@@ -19,7 +19,7 @@ package org.foomo.zugspitze.events
 	import flash.events.Event;
 
 	import org.foomo.zugspitze.operations.IOperation;
-	import org.foomo.flash.utils.ClassUtil;
+	import org.foomo.utils.ClassUtil;
 
 	/**
 	 * This class should not be used by it"s own.

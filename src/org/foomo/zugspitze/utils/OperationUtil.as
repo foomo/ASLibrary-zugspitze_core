@@ -16,11 +16,11 @@
  */
 package org.foomo.zugspitze.utils
 {
-	import org.foomo.flash.core.IUnload;
+	import org.foomo.core.IUnload;
 	import org.foomo.zugspitze.events.OperationEvent;
 	import org.foomo.zugspitze.operations.IOperation;
-	import org.foomo.flash.utils.ClassUtil;
-	import org.foomo.flash.utils.StringUtil;
+	import org.foomo.utils.ClassUtil;
+	import org.foomo.utils.StringUtil;
 
 	/**
 	 * @link    http://www.foomo.org

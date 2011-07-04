@@ -16,13 +16,13 @@
  */
 package org.foomo.zugspitze.managers
 {
-	import org.foomo.flash.utils.ArrayUtil;
-	import org.foomo.flash.utils.ClassUtil;
+	import org.foomo.utils.ArrayUtil;
+	import org.foomo.utils.ClassUtil;
 
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.utils.getQualifiedClassName;
-	import org.foomo.flash.managers.LogManager;
+	import org.foomo.managers.LogManager;
 
 	[Event(name="change", type="flash.events.Event")]
 	//[ExcludeClass]

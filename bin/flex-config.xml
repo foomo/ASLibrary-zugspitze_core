@@ -58,6 +58,7 @@
       <external-library-path>
          <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/libs/player/10.2/playerglobal.swc</path-element>
          <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/libs/rpc.swc</path-element>
+         <path-element>/Users/franklin/Workspaces/flex4/foomo_core/bin/foomo_core.swc</path-element>
       </external-library-path>
       <fonts>
          <!-- compiler.fonts.advanced-anti-aliasing: enables advanced anti-aliasing for embedded fonts, which provides greater clarity for small fonts.-->
@@ -133,7 +134,6 @@
          <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/libs/authoringsupport.swc</path-element>
          <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/libs/flash-integration.swc</path-element>
          <path-element>/Applications/Adobe Flash Builder 4.5/sdks/4.5.1/frameworks/locale/{locale}</path-element>
-         <path-element>/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc</path-element>
       </library-path>
       <!-- compiler.locale: specifies the locale for internationalization-->
       <locale>

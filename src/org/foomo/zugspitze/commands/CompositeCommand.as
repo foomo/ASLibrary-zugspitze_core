@@ -18,10 +18,10 @@ package org.foomo.zugspitze.commands
 {
 	import flash.utils.getQualifiedClassName;
 
-	import org.foomo.flash.core.IUnload;
+	import org.foomo.core.IUnload;
 	import org.foomo.zugspitze.events.CommandEvent;
-	import org.foomo.flash.managers.LogManager;
-	import org.foomo.flash.utils.ClassUtil;
+	import org.foomo.managers.LogManager;
+	import org.foomo.utils.ClassUtil;
 
 	/**
 	 * Executes several commands in a closed sequence.

@@ -16,9 +16,8 @@
  */
 package org.foomo.zugspitze.core
 {
-	import org.foomo.zugspitze.apps.IApplication;
 	import org.foomo.zugspitze.events.ZugspitzeEvent;
-	import org.foomo.flash.utils.DisplayObjectUtil;
+	import org.foomo.utils.DisplayObjectUtil;
 
 	import flash.display.DisplayObject;
 	import flash.events.Event;

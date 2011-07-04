@@ -22,11 +22,10 @@ package org.foomo.zugspitze.core
 	import flash.events.EventDispatcher;
 	import flash.utils.getQualifiedClassName;
 
-	import org.foomo.flash.core.Singleton;
-	import org.foomo.flash.managers.LogManager;
-	import org.foomo.flash.managers.LogManagerImpl;
-	import org.foomo.flash.utils.DisplayObjectContainerUtil;
-	import org.foomo.zugspitze.apps.IApplication;
+	import org.foomo.core.Singleton;
+	import org.foomo.managers.LogManager;
+	import org.foomo.managers.LogManagerImpl;
+	import org.foomo.utils.DisplayObjectContainerUtil;
 	import org.foomo.zugspitze.events.ZugspitzeEvent;
 	import org.foomo.zugspitze.managers.CommandManagerImpl;
 	import org.foomo.zugspitze.managers.StatusManagerImpl;
