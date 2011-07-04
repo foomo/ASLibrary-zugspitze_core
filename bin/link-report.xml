@@ -11,7 +11,7 @@
       <dep id="AS3" />
       <dep id="flash.display:DisplayObject" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc(org.foomo.flash.managers:LogManager)" mod="1309725144000" size="3391" optimizedsize="1531">
+    <script name="/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc(org.foomo.flash.managers:LogManager)" mod="1309772563000" size="3445" optimizedsize="1567">
       <def id="org.foomo.flash.managers:LogManager" />
       <pre id="Object" />
       <dep id="org.foomo.flash.managers:LogManagerImpl" />
@@ -48,7 +48,7 @@
       <dep id="org.foomo.flash.managers:LogManager" />
       <dep id="org.foomo.flash.utils:ArrayUtil" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc(org.foomo.flash.managers:LogManagerImpl)" mod="1309701044000" size="2757" optimizedsize="1431">
+    <script name="/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc(org.foomo.flash.managers:LogManagerImpl)" mod="1309772567000" size="2789" optimizedsize="1457">
       <def id="org.foomo.flash.managers:LogManagerImpl" />
       <pre id="flash.events:EventDispatcher" />
       <pre id="org.foomo.flash.managers:ILogManager" />
@@ -79,6 +79,12 @@
     <script name="/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc(org.foomo.flash.ui:Terminal)" mod="1309685332000" size="2145" optimizedsize="1366">
       <def id="org.foomo.flash.ui:Terminal" />
       <pre id="Object" />
+      <dep id="AS3" />
+    </script>
+    <script name="_29e9381b3b9a6c3acf1cc912946fa141f55f04eea1a49d7526aeec8041ec4ca9_flash_display_Sprite.as" mod="1309780937615" size="1095" optimizedsize="562">
+      <def id="_29e9381b3b9a6c3acf1cc912946fa141f55f04eea1a49d7526aeec8041ec4ca9_flash_display_Sprite" />
+      <pre id="flash.display:Sprite" />
+      <dep id="flash.system:Security" />
       <dep id="AS3" />
     </script>
     <script name="/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc(org.foomo.flash.events:LogManagerEvent)" mod="1309701044000" size="1202" optimizedsize="547">
@@ -174,7 +180,7 @@
       <pre id="Object" />
       <dep id="AS3" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc(org.foomo.flash.core:IUnload)" mod="1309685331000" size="406" optimizedsize="168">
+    <script name="/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc(org.foomo.flash.core:IUnload)" mod="1309685331000" size="401" optimizedsize="163">
       <def id="org.foomo.flash.core:IUnload" />
       <pre id="Object" />
       <dep id="AS3" />
@@ -203,12 +209,6 @@
       <dep id="AS3" />
       <dep id="org.foomo.zugspitze.utils:OperationUtil" />
       <dep id="org.foomo.zugspitze.events:OperationEvent" />
-    </script>
-    <script name="_8c37b7b3eb9393c1fca9fe513c210183af164a4d5faf0123f7b61c6e6173a8e6_flash_display_Sprite.as" mod="1309729300380" size="1095" optimizedsize="562">
-      <def id="_8c37b7b3eb9393c1fca9fe513c210183af164a4d5faf0123f7b61c6e6173a8e6_flash_display_Sprite" />
-      <pre id="flash.display:Sprite" />
-      <dep id="flash.system:Security" />
-      <dep id="AS3" />
     </script>
     <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/managers/CommandManagerImpl.as" mod="1309685331000" size="5794" optimizedsize="3205">
       <def id="org.foomo.zugspitze.managers:CommandManagerImpl" />
@@ -324,13 +324,12 @@
       <dep id="org.foomo.zugspitze.commands:IRedoableCommand" />
       <dep id="org.foomo.zugspitze.commands:ICommand" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc(org.foomo.flash.utils:ClassUtil)" mod="1309728984000" size="2447" optimizedsize="1380">
+    <script name="/Users/franklin/Workspaces/flex4/foomo_flash/bin/foomo_flash.swc(org.foomo.flash.utils:ClassUtil)" mod="1309771347000" size="1553" optimizedsize="838">
       <def id="org.foomo.flash.utils:ClassUtil" />
       <pre id="Object" />
       <dep id="flash.utils:getQualifiedClassName" />
       <dep id="AS3" />
       <dep id="flash.utils:getDefinitionByName" />
-      <dep id="XML" />
       <dep id="Error" />
     </script>
     <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/events/CommandEvent.as" mod="1309620473000" size="882" optimizedsize="489">
@@ -358,7 +357,6 @@
   </scripts>
   <external-defs>
     <ext id="AS3" />
-    <ext id="XML" />
     <ext id="Error" />
     <ext id="flash.display:DisplayObject" />
     <ext id="flash.utils:getQualifiedClassName" />
