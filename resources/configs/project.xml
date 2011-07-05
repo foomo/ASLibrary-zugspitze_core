@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.foomo.org" xsi:schemaLocation="http://www.foomo.org http://www.foomo.org/foomo/modules/Foomo.Flash/schemas/project.xsd">
+	<id>org.foomo.zugspitze.core</id>
+	<group>org.foomo.zugspitze</group>
+	<type>Library Project</type>
+	<name>Zugspitze Core Library</name>
+	<description>The Zugspitze Core Library.</description>
+	<exclude>true</exclude>
+	<dependencies>
+		<id>org.foomo.core</id>
+	</dependencies>
+</config>
