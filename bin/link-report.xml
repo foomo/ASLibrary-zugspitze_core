@@ -5,13 +5,7 @@
       <pre id="Object" />
       <dep id="AS3" />
     </script>
-    <script name="_32e59c8c19ff297d1cc69e8c151c9f368dcef784171b4d8f8e54eca1fe03c03a_flash_display_Sprite.as" mod="1309886950509" size="1095" optimizedsize="562">
-      <def id="_32e59c8c19ff297d1cc69e8c151c9f368dcef784171b4d8f8e54eca1fe03c03a_flash_display_Sprite" />
-      <pre id="flash.display:Sprite" />
-      <dep id="flash.system:Security" />
-      <dep id="AS3" />
-    </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/zugspitze_internal.as" mod="1309620142000" size="220" optimizedsize="121">
+    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/zugspitze_internal.as" mod="1309943581000" size="220" optimizedsize="121">
       <def id="org.foomo.zugspitze:zugspitze_internal" />
       <dep id="AS3" />
     </script>
@@ -42,20 +36,20 @@
       <dep id="Error" />
       <dep id="org.foomo.zugspitze.events:OperationEvent" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/managers/StatusManager.as" mod="1309794311000" size="1820" optimizedsize="869">
+    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/managers/StatusManager.as" mod="1309943180000" size="1819" optimizedsize="868">
       <def id="org.foomo.zugspitze.managers:StatusManager" />
       <pre id="flash.events:EventDispatcher" />
       <dep id="flash.events:Event" />
-      <dep id="org.foomo.core:Singleton" />
       <dep id="AS3" />
       <dep id="org.foomo.zugspitze.managers:StatusManagerImpl" />
+      <dep id="org.foomo.core:Managers" />
       <dep id="org.foomo.zugspitze.managers:IStatusManager" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/managers/CommandManager.as" mod="1309794311000" size="2592" optimizedsize="1151">
+    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/managers/CommandManager.as" mod="1309943180000" size="2591" optimizedsize="1150">
       <def id="org.foomo.zugspitze.managers:CommandManager" />
       <pre id="Object" />
-      <dep id="org.foomo.core:Singleton" />
       <dep id="AS3" />
+      <dep id="org.foomo.core:Managers" />
       <dep id="org.foomo.zugspitze.managers:ICommandManager" />
       <dep id="org.foomo.zugspitze.commands:ICommand" />
       <dep id="org.foomo.zugspitze.managers:CommandManagerImpl" />
@@ -154,7 +148,7 @@
       <pre id="flash.events:Event" />
       <dep id="AS3" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/core/Zugspitze.as" mod="1309794311000" size="4151" optimizedsize="2334">
+    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/core/Zugspitze.as" mod="1309944594000" size="4155" optimizedsize="2338">
       <def id="org.foomo.zugspitze.core:Zugspitze" />
       <pre id="flash.events:EventDispatcher" />
       <dep id="flash.events:Event" />
@@ -184,6 +178,12 @@
       <dep id="org.foomo.zugspitze.events:CommandEvent" />
       <dep id="AS3" />
       <dep id="org.foomo.zugspitze.commands:ICommand" />
+    </script>
+    <script name="_d1b5a1a7926a499264aa190354eee4d4a5ed2d0ed2feb84501da4df06c07e88f_flash_display_Sprite.as" mod="1309944603951" size="1095" optimizedsize="562">
+      <def id="_d1b5a1a7926a499264aa190354eee4d4a5ed2d0ed2feb84501da4df06c07e88f_flash_display_Sprite" />
+      <pre id="flash.display:Sprite" />
+      <dep id="flash.system:Security" />
+      <dep id="AS3" />
     </script>
     <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/operations/Operation.as" mod="1309794311000" size="2079" optimizedsize="1027">
       <def id="org.foomo.zugspitze.operations:Operation" />
@@ -268,8 +268,8 @@
     <ext id="org.foomo.utils:StringUtil" />
     <ext id="trace" />
     <ext id="flash.events:EventDispatcher" />
+    <ext id="org.foomo.core:Managers" />
     <ext id="Object" />
-    <ext id="org.foomo.core:Singleton" />
     <ext id="flash.display:DisplayObjectContainer" />
     <ext id="org.foomo.utils:ClassUtil" />
     <ext id="flash.display:Sprite" />

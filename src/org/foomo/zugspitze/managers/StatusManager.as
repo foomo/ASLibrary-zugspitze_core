@@ -18,7 +18,7 @@ package org.foomo.zugspitze.managers
 {
 	import flash.events.EventDispatcher;
 
-	import org.foomo.core.Singleton;
+	import org.foomo.core.Managers;
 
 	/**
 	 *  @eventType flash.events.Event.CHANGE
@@ -36,7 +36,7 @@ package org.foomo.zugspitze.managers
 		// ~ Static initialization
 		//-----------------------------------------------------------------------------------------
 
-		Singleton.registerClass('org.foomo.zugspitze.managers::IStatusManager', StatusManagerImpl);
+		Managers.registerClass('org.foomo.zugspitze.managers::IStatusManager', StatusManagerImpl);
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Static Variables
@@ -56,7 +56,7 @@ package org.foomo.zugspitze.managers
 		 */
 		private static function get impl():IStatusManager
 		{
-			if (!_impl) _impl = IStatusManager(Singleton.getInstance("org.foomo.zugspitze.managers::IStatusManager"));
+			if (!_impl) _impl = IStatusManager(Managers.getInstance("org.foomo.zugspitze.managers::IStatusManager"));
 			return _impl;
 		}
 

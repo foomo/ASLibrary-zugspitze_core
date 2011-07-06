@@ -16,7 +16,7 @@
  */
 package org.foomo.zugspitze.managers
 {
-	import org.foomo.core.Singleton;
+	import org.foomo.core.Managers;
 	import org.foomo.zugspitze.commands.ICommand;
 
 	/**
@@ -34,7 +34,7 @@ package org.foomo.zugspitze.managers
 		//-----------------------------------------------------------------------------------------
 
 		{
-			Singleton.registerClass('org.foomo.zugspitze.managers::ICommandManager', CommandManagerImpl);
+			Managers.registerClass('org.foomo.zugspitze.managers::ICommandManager', CommandManagerImpl);
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -62,7 +62,7 @@ package org.foomo.zugspitze.managers
 		 */
 		private static function get impl():ICommandManager
 		{
-			if (!_impl) _impl = ICommandManager(Singleton.getInstance("org.foomo.zugspitze.managers::ICommandManager"));
+			if (!_impl) _impl = ICommandManager(Managers.getInstance("org.foomo.zugspitze.managers::ICommandManager"));
 			return _impl;
 		}
 
