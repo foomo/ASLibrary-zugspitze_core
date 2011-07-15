@@ -41,5 +41,18 @@ package org.foomo.zugspitze.operations
 		 * Returns the operation progress
 		 */
 		function get progress():Number;
+
+
+		function addProgressCallback(callback:Function, ... args):IOperation
+		function addProgressListener(listener:Function):IOperation
+		function chainOnProgress(operationCall:Function, ... args):IOperation
+
+		function addCompleteCallback(callback:Function, ... args):IOperation
+		function addCompleteListener(listener:Function):IOperation
+		function chainOnComplete(operationCall:Function, ... args):IOperation
+
+		function addErrorCallback(callback:Function, ... args):IOperation
+		function addErrorListener(listener:Function):IOperation
+		function chainOnError(operationCall:Function, ... args):IOperation
 	}
 }

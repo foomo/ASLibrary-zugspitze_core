@@ -71,7 +71,7 @@
       <pre id="Object" />
       <dep id="AS3" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/operations/IOperation.as" mod="1309624705000" size="935" optimizedsize="302">
+    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/operations/IOperation.as" mod="1310740818000" size="2274" optimizedsize="581">
       <def id="org.foomo.zugspitze.operations:IOperation" />
       <pre id="flash.events:IEventDispatcher" />
       <pre id="Object" />
@@ -99,7 +99,7 @@
       <dep id="org.foomo.core:IUnload" />
       <dep id="org.foomo.zugspitze.commands:ICommand" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/operations/CompositeOperation.as" mod="1309636274000" size="1724" optimizedsize="753">
+    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/operations/CompositeOperation.as" mod="1310736497000" size="1724" optimizedsize="753">
       <def id="org.foomo.zugspitze.operations:CompositeOperation" />
       <pre id="org.foomo.zugspitze.operations:Operation" />
       <dep id="org.foomo.zugspitze.operations:IOperation" />
@@ -179,18 +179,29 @@
       <dep id="AS3" />
       <dep id="org.foomo.zugspitze.commands:ICommand" />
     </script>
-    <script name="_d1b5a1a7926a499264aa190354eee4d4a5ed2d0ed2feb84501da4df06c07e88f_flash_display_Sprite.as" mod="1309969850532" size="1095" optimizedsize="562">
-      <def id="_d1b5a1a7926a499264aa190354eee4d4a5ed2d0ed2feb84501da4df06c07e88f_flash_display_Sprite" />
+    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/operations/OperationProxy.as" mod="1310745530000" size="4928" optimizedsize="2318">
+      <def id="org.foomo.zugspitze.operations:OperationProxy" />
+      <pre id="org.foomo.zugspitze.operations:IOperation" />
+      <pre id="flash.utils:Proxy" />
+      <dep id="flash.events:Event" />
+      <dep id="org.foomo.zugspitze.operations:Operation" />
+      <dep id="AS3" />
+      <dep id="Error" />
+      <dep id="org.foomo.managers:LogManager" />
+    </script>
+    <script name="_4809a331207e127f16e5f9d7c4ea0ce8bf11d60dcd6827c6846401aa1772000d_flash_display_Sprite.as" mod="1310746157238" size="1095" optimizedsize="562">
+      <def id="_4809a331207e127f16e5f9d7c4ea0ce8bf11d60dcd6827c6846401aa1772000d_flash_display_Sprite" />
       <pre id="flash.display:Sprite" />
       <dep id="flash.system:Security" />
       <dep id="AS3" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/operations/Operation.as" mod="1309794311000" size="2079" optimizedsize="1027">
+    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/operations/Operation.as" mod="1310746150000" size="4362" optimizedsize="2147">
       <def id="org.foomo.zugspitze.operations:Operation" />
       <pre id="flash.events:EventDispatcher" />
       <pre id="org.foomo.zugspitze.operations:IOperation" />
       <dep id="AS3" />
       <dep id="org.foomo.utils:ClassUtil" />
+      <dep id="org.foomo.zugspitze.operations:OperationProxy" />
       <dep id="org.foomo.utils:StringUtil" />
     </script>
     <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/commands/CompositeCommand.as" mod="1309794311000" size="3476" optimizedsize="2104">
@@ -257,6 +268,7 @@
     <ext id="Error" />
     <ext id="flash.display:DisplayObject" />
     <ext id="org.foomo.core:IUnload" />
+    <ext id="flash.utils:Proxy" />
     <ext id="flash.utils:getQualifiedClassName" />
     <ext id="flash.utils:getTimer" />
     <ext id="flash.events:Event" />

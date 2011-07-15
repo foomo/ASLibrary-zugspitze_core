@@ -20,6 +20,7 @@ package org.foomo.zugspitze.operations
 
 	import org.foomo.utils.ClassUtil;
 	import org.foomo.utils.StringUtil;
+	import org.foomo.zugspitze.events.OperationEvent;
 
 	/**
 	 * This class should not be used by it self.
@@ -55,6 +56,10 @@ package org.foomo.zugspitze.operations
 		 *
 		 */
 		protected var _eventClass:Class;
+		/**
+		 *
+		 */
+		protected var _eventName:String;
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
@@ -63,6 +68,7 @@ package org.foomo.zugspitze.operations
 		public function Operation(eventClass:Class)
 		{
 			this._eventClass = eventClass;
+			this._eventName = StringUtil.lcFirst(ClassUtil.getClassName(this._eventClass)).replace('Event', '');
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -101,6 +107,72 @@ package org.foomo.zugspitze.operations
 			return this._progress;
 		}
 
+		/**
+		 *
+		 */
+		public function addProgressCallback(callback:Function, ... args):IOperation
+		{
+			return Operation.addCallback(this, this.addProgressListener, 'progress', callback, args);
+		}
+
+		/**
+		 *
+		 */
+		public function addProgressListener(listener:Function):IOperation
+		{
+			super.addEventListener(this._eventName + 'Progress', listener, false, 0, true);
+			return this;
+		}
+
+		public function chainOnProgress(operationCall:Function, ... args):IOperation
+		{
+			return Operation.addChain(this, this.addProgressListener, 'progress', operationCall, args);
+		}
+
+		/**
+		 *
+		 */
+		public function addCompleteCallback(callback:Function, ... args):IOperation
+		{
+			return Operation.addCallback(this, this.addCompleteListener, 'complete', callback, args);
+		}
+
+		/**
+		 *
+		 */
+		public function addCompleteListener(listener:Function):IOperation
+		{
+			super.addEventListener(this._eventName + 'Complete', listener, false, 0, true);
+			return this;
+		}
+
+		public function chainOnComplete(operationCall:Function, ... args):IOperation
+		{
+			return Operation.addChain(this, this.addCompleteListener, 'complete', operationCall, args);
+		}
+
+		/**
+		 *
+		 */
+		public function addErrorCallback(callback:Function, ... args):IOperation
+		{
+			return Operation.addCallback(this, this.addErrorListener, 'error', callback, args);
+		}
+
+		/**
+		 *
+		 */
+		public function addErrorListener(listener:Function):IOperation
+		{
+			super.addEventListener(this._eventName + 'Error', listener, false, 0, true);
+			return this;
+		}
+
+		public function chainOnError(operationCall:Function, ... args):IOperation
+		{
+			return Operation.addChain(this, this.addErrorListener, 'error', operationCall, args);
+		}
+
 		//-----------------------------------------------------------------------------------------
 		// ~ Protected methods
 		//-----------------------------------------------------------------------------------------
@@ -112,7 +184,7 @@ package org.foomo.zugspitze.operations
 		{
 			this._total = total;
 			this._progress = progress;
-			return this.dispatchEvent(new this._eventClass(this.eventClassToEventName() + 'Progress', this.untypedResult, this.untypedError, this.total, this.progress));
+			return this.dispatchEvent(new this._eventClass(this._eventName + 'Progress', this.untypedResult, this.untypedError, this.total, this.progress));
 		}
 
 		/**
@@ -121,7 +193,7 @@ package org.foomo.zugspitze.operations
 		protected function dispatchOperationCompleteEvent(result:*=null):Boolean
 		{
 			if (result != null) this._result = result;
-			return this.dispatchEvent(new this._eventClass(this.eventClassToEventName() + 'Complete', this.untypedResult, this.untypedError, this.total, this.progress));
+			return this.dispatchEvent(new this._eventClass(this._eventName + 'Complete', this.untypedResult, this.untypedError, this.total, this.progress));
 		}
 
 		/**
@@ -130,15 +202,37 @@ package org.foomo.zugspitze.operations
 		protected function dispatchOperationErrorEvent(error:*=null):Boolean
 		{
 			if (error != null) this._error = error;
-			return this.dispatchEvent(new this._eventClass(this.eventClassToEventName() + 'Error', this.untypedResult, this.untypedError, this.total, this.progress));
+			return this.dispatchEvent(new this._eventClass(this._eventName + 'Error', this.untypedResult, this.untypedError, this.total, this.progress));
+		}
+
+		//-----------------------------------------------------------------------------------------
+		// ~ Internal static methods
+		//-----------------------------------------------------------------------------------------
+
+		/**
+		 * @private
+		 */
+		internal static function addChain(thisArg:*, addListenerCall:Function, eventReturnParameter:String, operationCall:Function, args:Array):IOperation
+		{
+			var token:OperationProxy = new OperationProxy();
+			var fnc:Function = function(event:Object):void {
+				if (operationCall.length > args.length) args.unshift(event[eventReturnParameter]);
+				token.chain(operationCall.apply(thisArg, args))
+			}
+			addListenerCall.apply(thisArg, [fnc]);
+			return token;
 		}
 
 		/**
-		 *
+		 * @private
 		 */
-		protected function eventClassToEventName():String
+		internal static function addCallback(thisArg:*, addListenerCall:Function, eventReturnParameter:String, callback:Function, args:Array):IOperation
 		{
-			return StringUtil.lcFirst(ClassUtil.getClassName(this._eventClass)).replace('Event', '');
+			var fnc:Function = function(event:Object):void {
+				if (callback.length > args.length) args.unshift(event[eventReturnParameter]);
+				callback.apply(thisArg, args)
+			}
+			return addListenerCall.apply(thisArg, [fnc]);
 		}
 	}
 }
