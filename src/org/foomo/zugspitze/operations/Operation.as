@@ -19,7 +19,6 @@ package org.foomo.zugspitze.operations
 	import flash.events.EventDispatcher;
 
 	import org.foomo.utils.ClassUtil;
-	import org.foomo.utils.StringUtil;
 	import org.foomo.zugspitze.events.OperationEvent;
 
 	/**
@@ -29,6 +28,7 @@ package org.foomo.zugspitze.operations
 	 * @link    http://www.foomo.org
 	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author  franklin <franklin@weareinteractive.com>
+	 * @todo	Add progress operation
 	 */
 	public class Operation extends EventDispatcher implements IOperation
 	{
@@ -44,31 +44,13 @@ package org.foomo.zugspitze.operations
 		 *
 		 */
 		protected var _result:*;
-		/**
-		 *
-		 */
-		protected var _total:Number;
-		/**
-		 *
-		 */
-		protected var _progress:Number;
-		/**
-		 *
-		 */
-		protected var _eventClass:Class;
-		/**
-		 *
-		 */
-		protected var _eventName:String;
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function Operation(eventClass:Class)
+		public function Operation()
 		{
-			this._eventClass = eventClass;
-			this._eventName = StringUtil.lcFirst(ClassUtil.getClassName(this._eventClass)).replace('Event', '');
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -78,7 +60,7 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		public function get untypedResult():*
+		public function get result():*
 		{
 			return this._result;
 		}
@@ -86,7 +68,7 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		public function get untypedError():*
+		public function get error():*
 		{
 			return this._error;
 		}
@@ -94,39 +76,10 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		public function get total():Number
+		public function addCompleteListener(listener:Function):IOperation
 		{
-			return this._total;
-		}
-
-		/**
-		 *
-		 */
-		public function get progress():Number
-		{
-			return this._progress;
-		}
-
-		/**
-		 *
-		 */
-		public function addProgressCallback(callback:Function, ... args):IOperation
-		{
-			return Operation.addCallback(this, this.addProgressListener, 'progress', callback, args);
-		}
-
-		/**
-		 *
-		 */
-		public function addProgressListener(listener:Function):IOperation
-		{
-			super.addEventListener(this._eventName + 'Progress', listener, false, 0, true);
+			this.addEventListener(OperationEvent.OPERATION_COMPLETE, listener, false, 0, true);
 			return this;
-		}
-
-		public function chainOnProgress(operationCall:Function, ... args):IOperation
-		{
-			return Operation.addChain(this, this.addProgressListener, 'progress', operationCall, args);
 		}
 
 		/**
@@ -134,29 +87,15 @@ package org.foomo.zugspitze.operations
 		 */
 		public function addCompleteCallback(callback:Function, ... args):IOperation
 		{
-			return Operation.addCallback(this, this.addCompleteListener, 'complete', callback, args);
+			return this.addCallback(OperationEvent.OPERATION_COMPLETE, callback, args);
 		}
 
 		/**
 		 *
 		 */
-		public function addCompleteListener(listener:Function):IOperation
+		public function chainOnComplete(operation:Class, ... args):IOperation
 		{
-			super.addEventListener(this._eventName + 'Complete', listener, false, 0, true);
-			return this;
-		}
-
-		public function chainOnComplete(operationCall:Function, ... args):IOperation
-		{
-			return Operation.addChain(this, this.addCompleteListener, 'complete', operationCall, args);
-		}
-
-		/**
-		 *
-		 */
-		public function addErrorCallback(callback:Function, ... args):IOperation
-		{
-			return Operation.addCallback(this, this.addErrorListener, 'error', callback, args);
+			return this.addChain(OperationEvent.OPERATION_COMPLETE, operation ,args);
 		}
 
 		/**
@@ -164,14 +103,26 @@ package org.foomo.zugspitze.operations
 		 */
 		public function addErrorListener(listener:Function):IOperation
 		{
-			super.addEventListener(this._eventName + 'Error', listener, false, 0, true);
+			this.addEventListener(OperationEvent.OPERATION_ERROR, listener, false, 0, true);
 			return this;
 		}
 
-		public function chainOnError(operationCall:Function, ... args):IOperation
+		/**
+		 *
+		 */
+		public function addErrorCallback(callback:Function, ... args):IOperation
 		{
-			return Operation.addChain(this, this.addErrorListener, 'error', operationCall, args);
+			return this.addCallback(OperationEvent.OPERATION_ERROR, callback, args);
 		}
+
+		/**
+		 *
+		 */
+		public function chainOnError(operation:Class, ... args):IOperation
+		{
+			return this.addChain(OperationEvent.OPERATION_ERROR, operation, args);
+		}
+
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Protected methods
@@ -180,20 +131,10 @@ package org.foomo.zugspitze.operations
 		/**
 		 *
 		 */
-		protected function dispatchOperationProgressEvent(total:Number, progress:Number):Boolean
-		{
-			this._total = total;
-			this._progress = progress;
-			return this.dispatchEvent(new this._eventClass(this._eventName + 'Progress', this.untypedResult, this.untypedError, this.total, this.progress));
-		}
-
-		/**
-		 *
-		 */
 		protected function dispatchOperationCompleteEvent(result:*=null):Boolean
 		{
 			if (result != null) this._result = result;
-			return this.dispatchEvent(new this._eventClass(this._eventName + 'Complete', this.untypedResult, this.untypedError, this.total, this.progress));
+			return this.dispatchEvent(new OperationEvent(OperationEvent.OPERATION_COMPLETE, this));
 		}
 
 		/**
@@ -202,37 +143,59 @@ package org.foomo.zugspitze.operations
 		protected function dispatchOperationErrorEvent(error:*=null):Boolean
 		{
 			if (error != null) this._error = error;
-			return this.dispatchEvent(new this._eventClass(this._eventName + 'Error', this.untypedResult, this.untypedError, this.total, this.progress));
+			return this.dispatchEvent(new OperationEvent(OperationEvent.OPERATION_ERROR, this));
 		}
 
 		//-----------------------------------------------------------------------------------------
-		// ~ Internal static methods
+		// ~ Private methods
 		//-----------------------------------------------------------------------------------------
 
 		/**
 		 * @private
 		 */
-		internal static function addChain(thisArg:*, addListenerCall:Function, eventReturnParameter:String, operationCall:Function, args:Array):IOperation
+		private function addCallback(type:String, callback:Function, args:Array):IOperation
 		{
-			var token:OperationProxy = new OperationProxy();
-			var fnc:Function = function(event:Object):void {
-				if (operationCall.length > args.length) args.unshift(event[eventReturnParameter]);
-				token.chain(operationCall.apply(thisArg, args))
+			var fnc:Function
+			var instance:Operation = this;
+
+			fnc = function(event:OperationEvent):void {
+				if (callback.length > args.length) args.unshift(event.operation[(type == OperationEvent.OPERATION_COMPLETE) ? 'result' : 'error']);
+				callback.apply(instance, args);
+				instance.removeEventListener(type, fnc);
 			}
-			addListenerCall.apply(thisArg, [fnc]);
-			return token;
+			instance.addEventListener(type, fnc, false, 0, true);
+			return this;
 		}
 
 		/**
 		 * @private
 		 */
-		internal static function addCallback(thisArg:*, addListenerCall:Function, eventReturnParameter:String, callback:Function, args:Array):IOperation
+		private function addChain(type:String, operation:Class, args:Array):IOperation
 		{
-			var fnc:Function = function(event:Object):void {
-				if (callback.length > args.length) args.unshift(event[eventReturnParameter]);
-				callback.apply(thisArg, args)
+			var fnc:Function;
+			var instance:Operation = this;
+			var proxy:OperationProxy = new OperationProxy();
+
+			fnc = function(event:OperationEvent):void {
+				if (ClassUtil.getConstructorParameters(operation).length > args.length) args.unshift(event.operation[(type == OperationEvent.OPERATION_COMPLETE) ? 'result' : 'error']);
+				proxy.chain(ClassUtil.createInstance(operation, args));
+				instance.removeEventListener(type, fnc);
 			}
-			return addListenerCall.apply(thisArg, [fnc]);
+
+			instance.addEventListener(type, fnc, false, 0, true);
+			return proxy;
+		}
+
+		//-----------------------------------------------------------------------------------------
+		// ~ Public static methods
+		//-----------------------------------------------------------------------------------------
+
+		/**
+		 *
+		 */
+		public static function create(operation:Class, ... args):IOperation
+		{
+			return ClassUtil.createInstance(operation, args);
 		}
 	}
 }

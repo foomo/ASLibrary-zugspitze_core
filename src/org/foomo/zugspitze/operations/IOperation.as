@@ -26,33 +26,36 @@ package org.foomo.zugspitze.operations
 	public interface IOperation extends IEventDispatcher
 	{
 		/**
-		 * Returns an untyped result
+		 * Operations result
 		 */
-		function get untypedResult():*;
+		function get result():*;
 		/**
-		 * Returns an untyped error
+		 * Operation error
 		 */
-		function get untypedError():*;
+		function get error():*;
 		/**
-		 * Returns the operation total
+		 *
 		 */
-		function get total():Number;
+		function addCompleteListener(listener:Function):IOperation;
 		/**
-		 * Returns the operation progress
+		 *
 		 */
-		function get progress():Number;
-
-
-		function addProgressCallback(callback:Function, ... args):IOperation
-		function addProgressListener(listener:Function):IOperation
-		function chainOnProgress(operationCall:Function, ... args):IOperation
-
-		function addCompleteCallback(callback:Function, ... args):IOperation
-		function addCompleteListener(listener:Function):IOperation
-		function chainOnComplete(operationCall:Function, ... args):IOperation
-
-		function addErrorCallback(callback:Function, ... args):IOperation
-		function addErrorListener(listener:Function):IOperation
-		function chainOnError(operationCall:Function, ... args):IOperation
+		function addCompleteCallback(callback:Function, ... args):IOperation;
+		/**
+		 *
+		 */
+		function addErrorListener(listener:Function):IOperation;
+		/**
+		 *
+		 */
+		function addErrorCallback(callback:Function, ... args):IOperation;
+		/**
+		 *
+		 */
+		function chainOnComplete(operation:Class, ... args):IOperation;
+		/**
+		 *
+		 */
+		function chainOnError(operation:Class, ... args):IOperation;
 	}
 }

@@ -1,38 +1,18 @@
-/*
- * This file is part of the foomo Opensource Framework.
- *
- * The foomo Opensource Framework is free software: you can redistribute it
- * and/or modify it under the terms of the GNU Lesser General Public License as
- * published  by the Free Software Foundation, either version 3 of the
- * License, or (at your option) any later version.
- *
- * The foomo Opensource Framework is distributed in the hope that it will
- * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
- * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License along with
- * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
- */
 package org.foomo.zugspitze.events
 {
 	import flash.events.Event;
 
 	import org.foomo.zugspitze.operations.IOperation;
 
-	/**
-	 * @link    http://www.foomo.org
-	 * @license http://www.gnu.org/licenses/lgpl.txt
-	 * @author  franklin <franklin@weareinteractive.com>
-	 */
-	public class OperationEvent extends Event
+	public class UnhandledOperationEvent extends Event
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Constants
 		//-----------------------------------------------------------------------------------------
 
-		public static const OPERATION_ERROR:String 		= "operationError";
-		public static const OPERATION_COMPLETE:String 	= "operationComplete";
+		public static const UNHANDLED_OPERATION_ERROR:String 		= "unhandledOperationError";
+		public static const UNHANDLED_OPERATION_COMPLETE:String 	= "unhandledOperationComplete";
+		public static const UNHANDLED_OPERATION_PROGRESS:String 	= "unhandledOperationProgress";
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
@@ -47,7 +27,7 @@ package org.foomo.zugspitze.events
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function OperationEvent(type:String, operation:IOperation, bubbles:Boolean=false, cancelable:Boolean=false)
+		public function UnhandledOperationEvent(type:String, operation:IOperation, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
 			this._operation = operation;
 			super(type, bubbles, cancelable);
@@ -74,7 +54,7 @@ package org.foomo.zugspitze.events
 		 */
 		override public function clone():Event
 		{
-			return new OperationEvent(this.type, this.operation, this.bubbles, this.cancelable);
+			return new UnhandledOperationEvent(this.type, this.operation, this.bubbles, this.cancelable);
 		}
 
 		/**
