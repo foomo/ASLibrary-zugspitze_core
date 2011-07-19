@@ -22,7 +22,9 @@ package org.foomo.zugspitze.operations
 	import flash.utils.Proxy;
 	import flash.utils.flash_proxy;
 
+	import org.foomo.core.IUnload;
 	import org.foomo.managers.LogManager;
+	import org.foomo.utils.ClassUtil;
 	import org.foomo.zugspitze.events.OperationEvent;
 
 	/**
@@ -31,17 +33,17 @@ package org.foomo.zugspitze.operations
 	 * @author  franklin <franklin@weareinteractive.com>
 	 * @todo	check if you can implement the IEventDispatcher async
 	 */
-	dynamic internal class OperationProxy extends Proxy implements IOperation
+	dynamic public class OperationProxy extends Proxy implements IOperation, IUnload
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
 		//-----------------------------------------------------------------------------------------
 
-		private var _progressListeners:Array = new Array;
-		private var _completeListeners:Array = new Array;
-		private var _errorListeners:Array = new Array;
-
-		private var _operation:IOperation;
+		protected var _completeListeners:Array = new Array;
+		protected var _completeCallbacks:Array = new Array;
+		protected var _errorListeners:Array = new Array;
+		protected var _errorCallbacks:Array = new Array;
+		protected var _operation:IOperation;
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
@@ -58,67 +60,17 @@ package org.foomo.zugspitze.operations
 		/**
 		 * Returns an untyped result
 		 */
-		public function get untypedResult():*
+		public function get result():*
 		{
-			return this._operation.untypedResult;
+			return this._operation.result;
 		}
 
 		/**
 		 * Returns an untyped error
 		 */
-		public function get untypedError():*
+		public function get error():*
 		{
-			return this._operation.untypedError;
-		}
-
-		/**
-		 * Returns the operation total
-		 */
-		public function get total():Number
-		{
-			return this._operation.total;
-		}
-
-		/**
-		 * Returns the operation progress
-		 */
-		public function get progress():Number
-		{
-			return this._operation.progress;
-		}
-
-
-		/**
-		 *
-		 */
-		public function addProgressCallback(callback:Function, ... args):IOperation
-		{
-			return Operation.addCallback(this, this.addProgressListener, 'progress', callback, args);
-		}
-
-		/**
-		 *
-		 */
-		public function addProgressListener(listener:Function):IOperation
-		{
-			this._progressListeners.push(listener);
-			return this;
-		}
-
-		/**
-		 *
-		 */
-		public function chainOnProgress(operationCall:Function, ... args):IOperation
-		{
-			return Operation.addChain(this, addProgressListener, 'progress', operationCall, args);
-		}
-
-		/**
-		 *
-		 */
-		public function addCompleteCallback(callback:Function, ... args):IOperation
-		{
-			return Operation.addCallback(this, this.addCompleteListener, 'complete', callback, args);
+			return this._operation.error;
 		}
 
 		/**
@@ -126,25 +78,18 @@ package org.foomo.zugspitze.operations
 		 */
 		public function addCompleteListener(listener:Function):IOperation
 		{
-			this._completeListeners.push(listener);
+			this._completeListeners.push({listener:listener});
 			return this;
 		}
 
 		/**
 		 *
 		 */
-		public function chainOnComplete(operationCall:Function, ... args):IOperation
+		public function addCompleteCallback(callback:Function, ... args):IOperation
 		{
-			return Operation.addChain(this, this.addCompleteListener, 'result', operationCall, args);
-		}
-
-
-		/**
-		 *
-		 */
-		public function addErrorCallback(callback:Function, ... args):IOperation
-		{
-			return Operation.addCallback(this, this.addCompleteListener, 'error', callback, args);
+			args.unshift(callback);
+			this._completeCallbacks.push({args:args});
+			return this;
 		}
 
 		/**
@@ -152,17 +97,32 @@ package org.foomo.zugspitze.operations
 		 */
 		public function addErrorListener(listener:Function):IOperation
 		{
-			this._errorListeners.push(listener);
+			this._errorListeners.push({listener:listener});
 			return this;
 		}
 
 		/**
 		 *
 		 */
-		public function chainOnError(operationCall:Function, ... args):IOperation
+		public function addErrorCallback(callback:Function, ... args):IOperation
 		{
-			if (!this._operation) throw new Error('The opertion that you chained does not exist yet!');
-			return Operation.addChain(this, addErrorListener, 'error', operationCall, args);
+			args.unshift(callback);
+			this._errorCallbacks.push({args:args});
+			return this;
+		}
+		/**
+		 *
+		 */
+		public function chainOnComplete(operation:Class, ... args):IOperation
+		{
+			return this.addChain(this.addCompleteCallback, operation ,args);
+		}
+		/**
+		 *
+		 */
+		public function chainOnError(operation:Class, ... args):IOperation
+		{
+			return this.addChain(this.addErrorCallback, operation, args);
 		}
 
 		/**
@@ -208,6 +168,17 @@ package org.foomo.zugspitze.operations
 		{
 			if (!this._operation) throw new Error('The opertion that you chained does not exist yet!');
 			return this._operation.willTrigger(type);
+		}
+
+		/**
+		 *
+		 */
+		public function unload():void
+		{
+			this._completeCallbacks = null;
+			this._completeListeners = null;
+			this._errorCallbacks = null;
+			this._errorListeners = null;
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -256,11 +227,30 @@ package org.foomo.zugspitze.operations
 		 */
 		internal function chain(operation:IOperation):void
 		{
-			var listener:Function;
+			var obj:Object;
 			this._operation = operation;
-			while (listener = this._progressListeners.shift()) operation.addProgressListener(listener);
-			while (listener = this._completeListeners.shift()) operation.addCompleteListener(listener);
-			while (listener = this._errorListeners.shift()) operation.addErrorListener(listener);
+			while (obj = this._completeListeners.shift()) operation.addCompleteListener(obj.listener);
+			while (obj = this._completeCallbacks.shift()) (operation.addCompleteCallback as Function).apply(this, obj.args);
+			while (obj = this._errorListeners.shift()) operation.addErrorListener(obj.listener);
+			while (obj = this._errorCallbacks.shift()) (operation.addErrorCallback as Function).apply(this, obj.args);
+		}
+
+		/**
+		 * @private
+		 */
+		private function addChain(callbackListener:Function, operation:Class, args:Array):IOperation
+		{
+			var fnc:Function;
+			var instance:OperationProxy = this;
+			var proxy:OperationProxy = new OperationProxy();
+
+			fnc = function(value:*):void {
+				if (ClassUtil.getConstructorParameters(operation).length > args.length) args.unshift(value);
+				proxy.chain(ClassUtil.createInstance(operation, args));
+			}
+
+			callbackListener.apply(this, [fnc]);
+			return proxy;
 		}
 	}
 }

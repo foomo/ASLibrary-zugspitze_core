@@ -19,13 +19,8 @@ package org.foomo.zugspitze.events
 	import flash.events.Event;
 
 	import org.foomo.zugspitze.operations.IOperation;
-	import org.foomo.utils.ClassUtil;
 
 	/**
-	 * This class should not be used by it"s own.
-	 * Extend it and define your own result and error types.
-	 * There are some helper constants if you need to propagate operation events without typing them.
-	 *
 	 * @link    http://www.foomo.org
 	 * @license http://www.gnu.org/licenses/lgpl.txt
 	 * @author  franklin <franklin@weareinteractive.com>
@@ -36,12 +31,8 @@ package org.foomo.zugspitze.events
 		// ~ Constants
 		//-----------------------------------------------------------------------------------------
 
-		public static const OPERATION_ERROR:String 				= "operationError";
-		public static const OPERATION_COMPLETE:String 			= "operationComplete";
-		public static const OPERATION_PROGRESS:String 			= "operationProgress";
-		public static const UNHANDLED_OPERATION_COMPLETE:String = "unhandledOperationComplete";
-		public static const UNHANDLED_OPERATION_PROGRESS:String = "unhandledOperationProgress";
-		public static const UNHANDLED_OPERATION_ERROR:String 	= "unhandledOperationError";
+		public static const OPERATION_ERROR:String 		= "operationError";
+		public static const OPERATION_COMPLETE:String 	= "operationComplete";
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
@@ -50,31 +41,16 @@ package org.foomo.zugspitze.events
 		/**
 		 *
 		 */
-		private var _result:*;
-		/**
-		 *
-		 */
-		private var _error:*;
-		/**
-		 *
-		 */
-		private var _total:Number;
-		/**
-		 *
-		 */
-		private var _progress:Number;
+		private var _operation:IOperation;
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------
 
-		public function OperationEvent(type:String, result:*=null, error:*=null, total:Number=0, progress:Number=0)
+		public function OperationEvent(type:String, operation:IOperation, bubbles:Boolean=false, cancelable:Boolean=false)
 		{
-			this._result = result;
-			this._error = error;
-			this._total = total;
-			this._progress = progress;
-			super(type);
+			this._operation = operation;
+			super(type, bubbles, cancelable);
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -84,42 +60,9 @@ package org.foomo.zugspitze.events
 		/**
 		 *
 		 */
-		public function get untypedResult():*
+		public function get operation():IOperation
 		{
-			return this._result;
-		}
-
-		/**
-		 *
-		 */
-		public function get untypedError():*
-		{
-			return this._error;
-		}
-
-		/**
-		 *
-		 */
-		public function get total():Number
-		{
-			return this._total;
-		}
-
-		/**
-		 *
-		 */
-		public function get progress():Number
-		{
-			return this._progress;
-		}
-
-		/**
-		 * Clone event with different type
-		 */
-		public function cloneWithType(type:String):OperationEvent
-		{
-			var eventClass:Class = ClassUtil.getClass(this);
-			return new eventClass(type, this.untypedResult, this.untypedError, this.total, this.progress);
+			return this._operation;
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -131,8 +74,7 @@ package org.foomo.zugspitze.events
 		 */
 		override public function clone():Event
 		{
-			var eventClass:Class = ClassUtil.getClass(this);
-			return new eventClass(this.type, this.untypedResult, this.untypedError, this.total, this.progress);
+			return new OperationEvent(this.type, this.operation, this.bubbles, this.cancelable);
 		}
 
 		/**
@@ -140,7 +82,7 @@ package org.foomo.zugspitze.events
 		 */
 		override public function toString():String
 		{
-			return formatToString(ClassUtil.getClassName(this), "result", "error", "total", "progress");
+			return formatToString("type", "operation", "bubbles", "cancelable");
 		}
 	}
 }

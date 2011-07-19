@@ -80,7 +80,6 @@ package org.foomo.zugspitze.utils
 
 		/**
 		 * Clone an operation event with a basic type
-		 */
 		public static function cloneToUnhandledOperationEvent(event:OperationEvent):OperationEvent
 		{
 			switch (true) {
@@ -99,10 +98,10 @@ package org.foomo.zugspitze.utils
 			}
 			return event;
 		}
+		 */
 
 		/**
 		 * Clone an operation event with a basic type
-		 */
 		public static function cloneToOperationEvent(event:OperationEvent):OperationEvent
 		{
 			switch (true) {
@@ -121,5 +120,6 @@ package org.foomo.zugspitze.utils
 			}
 			return event;
 		}
+		 */
 	}
 }

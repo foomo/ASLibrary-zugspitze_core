@@ -44,7 +44,6 @@ package org.foomo.zugspitze.core
 
 		/**
 		 * @return IOperation The executed operation
-		 */
 		protected function registerOperation(operation:IOperation,completeHandler:Function=null,errorHandler:Function=null,progressHandler:Function=null):*
 		{
 			if (progressHandler == null) progressHandler = this.unhandledOperations_operationEventHandler;
@@ -53,10 +52,10 @@ package org.foomo.zugspitze.core
 			OperationUtil.register(operation, completeHandler, errorHandler, progressHandler);
 			return OperationUtil.register(operation, this.allOperations_operationEventHandler, this.allOperations_operationEventHandler, this.allOperations_operationEventHandler, true);
 		}
+		 */
 
 		/**
 		 * @return ZugspitzeModel
-		 */
 		protected function registerModel(model:ZugspitzeModel):*
 		{
 			model.addEventListener(OperationEvent.OPERATION_COMPLETE, this.allOperations_operationEventHandler, false, 0, true);
@@ -67,6 +66,7 @@ package org.foomo.zugspitze.core
 			model.addEventListener(OperationEvent.UNHANDLED_OPERATION_ERROR, this.unhandledOperations_operationEventHandler, false, 0, true);
 			return model;
 		}
+		 */
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Protected eventhandler
@@ -74,18 +74,18 @@ package org.foomo.zugspitze.core
 
 		/**
 		 *
-		 */
 		protected function unhandledOperations_operationEventHandler(event:OperationEvent):void
 		{
 			this.dispatchEvent(OperationUtil.cloneToUnhandledOperationEvent(event));
 		}
+		 */
 
 		/**
 		 *
-		 */
 		protected function allOperations_operationEventHandler(event:OperationEvent):void
 		{
 			this.dispatchEvent(OperationUtil.cloneToOperationEvent(event));
 		}
+		 */
 	}
 }
