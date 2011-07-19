@@ -188,6 +188,9 @@ package org.foomo.zugspitze.commands
 		// ~ Private methods
 		//-----------------------------------------------------------------------------------------
 
+		/**
+		 *
+		 */
 		private function get currentStack():CommandStack
 		{
 			if (this._stacks[this._name] == null) {

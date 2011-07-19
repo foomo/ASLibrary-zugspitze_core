@@ -16,24 +16,25 @@
  */
 package org.foomo.zugspitze.managers
 {
+	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.utils.getQualifiedClassName;
 	import flash.utils.getTimer;
 
+	import org.foomo.core.IUnload;
+	import org.foomo.managers.LogManager;
+	import org.foomo.utils.ClassUtil;
 	import org.foomo.zugspitze.commands.Command;
 	import org.foomo.zugspitze.commands.CommandHistory;
 	import org.foomo.zugspitze.commands.CommandQueue;
 	import org.foomo.zugspitze.commands.ICommand;
 	import org.foomo.zugspitze.commands.IRedoableCommand;
 	import org.foomo.zugspitze.commands.IUndoableCommand;
-	import org.foomo.core.IUnload;
 	import org.foomo.zugspitze.events.CommandEvent;
-	import org.foomo.utils.ClassUtil;
-	import org.foomo.managers.LogManager;
 
+	[ExcludeClass]
 	[Event(name="commandError", type="org.foomo.zugspitze.events.CommandEvent")]
 	[Event(name="commandComplete", type="org.foomo.zugspitze.events.CommandEvent")]
-	//[ExcludeClass]
 
 	/**
 	 * @link www.foomo.org
@@ -117,6 +118,7 @@ package org.foomo.zugspitze.managers
 		public function set historyName(value:String):void
 		{
 			this._commandHistory.name = value;
+			this.dispatchEvent(new Event('update'));
 		}
 
 		/**
@@ -133,6 +135,7 @@ package org.foomo.zugspitze.managers
 		public function set historySize(value:int):void
 		{
 			this._commandHistory.size = value;
+			this.dispatchEvent(new Event('update'));
 		}
 
 		/**
@@ -146,6 +149,7 @@ package org.foomo.zugspitze.managers
 		/**
 		 * @return				has undoable command in history
 		 */
+		[Bindable(event="update")]
 		public function get undoAble():Boolean
 		{
 			return this._commandHistory.hasPrevious;
@@ -154,6 +158,7 @@ package org.foomo.zugspitze.managers
 		/**
 		 * @return 				has redoable command in history
 		 */
+		[Bindable(event="update")]
 		public function get redoAble():Boolean
 		{
 			return this._commandHistory.hasNext;
@@ -191,6 +196,7 @@ package org.foomo.zugspitze.managers
 			}
 
 			this.undoCommand(this._commandHistory.previous);
+			this.dispatchEvent(new Event('update'));
 		}
 
 		/**
@@ -214,6 +220,7 @@ package org.foomo.zugspitze.managers
 			}
 
 			this.redoCommand(this._commandHistory.next);
+			this.dispatchEvent(new Event('update'));
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -245,6 +252,7 @@ package org.foomo.zugspitze.managers
 			this._pendingCommand.removeEventListener(CommandEvent.COMMAND_ERROR, this.commandErrorEventHandler);
 			if (this._pendingCommand.setBusyStatus) this.removeBusyStatus();
 			this._commandHistory.put(ICommand(this._pendingCommand));
+			this.dispatchEvent(new Event('update'));
 			this._pendingCommand = null;
 			if (this._commandQueue.hasNext) this.executeCommand(this._commandQueue.next);
 		}
@@ -361,6 +369,7 @@ package org.foomo.zugspitze.managers
 			this._commandHistory.clear();
 			this._commandQueue.clear();
 			this.removeBusyStatus(true);
+			this.dispatchEvent(new Event('update'));
 			this.dispatchEvent(new CommandEvent(event.type, event.command));
 		}
 	}
