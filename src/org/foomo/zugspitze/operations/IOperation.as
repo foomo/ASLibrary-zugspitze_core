@@ -33,29 +33,5 @@ package org.foomo.zugspitze.operations
 		 * Operation error
 		 */
 		function get error():*;
-		/**
-		 *
-		 */
-		function addCompleteListener(listener:Function):IOperation;
-		/**
-		 *
-		 */
-		function addCompleteCallback(callback:Function, ... args):IOperation;
-		/**
-		 *
-		 */
-		function addErrorListener(listener:Function):IOperation;
-		/**
-		 *
-		 */
-		function addErrorCallback(callback:Function, ... args):IOperation;
-		/**
-		 *
-		 */
-		function chainOnComplete(operation:Class, ... args):IOperation;
-		/**
-		 *
-		 */
-		function chainOnError(operation:Class, ... args):IOperation;
 	}
 }

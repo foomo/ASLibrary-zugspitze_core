@@ -1,8 +1,29 @@
+/*
+ * This file is part of the foomo Opensource Framework.
+ *
+ * The foomo Opensource Framework is free software: you can redistribute it
+ * and/or modify it under the terms of the GNU Lesser General Public License as
+ * published  by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ *
+ * The foomo Opensource Framework is distributed in the hope that it will
+ * be useful, but WITHOUT ANY WARRANTY; without even the implied warranty
+ * of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License along with
+ * the foomo Opensource Framework. If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.foomo.zugspitze.operations
 {
 	import org.foomo.utils.ClassUtil;
 	import org.foomo.zugspitze.events.ProgressOperationEvent;
 
+	/**
+	 * @link    http://www.foomo.org
+	 * @license http://www.gnu.org/licenses/lgpl.txt
+	 * @author  franklin <franklin@weareinteractive.com>
+	 */
 	public class ProgressOperation extends Operation implements IProgressOperation
 	{
 		//-----------------------------------------------------------------------------------------
@@ -47,31 +68,6 @@ package org.foomo.zugspitze.operations
 			return this._progress;
 		}
 
-		/**
-		 *
-		 */
-		public function addProgressListener(listener:Function):IProgressOperation
-		{
-			this.addEventListener(ProgressOperationEvent.OPERATION_PROGRESS, listener, false, 0, true);
-			return this;
-		}
-
-		/**
-		 *
-		 */
-		public function addProgressCallback(callback:Function, ... args):IProgressOperation
-		{
-			return this.addCallback(callback, args);
-		}
-
-		/**
-		 *
-		 */
-		public function chainOnProgress(operation:Class, ... args):IProgressOperation
-		{
-			return null;
-		}
-
 		//-----------------------------------------------------------------------------------------
 		// ~ Protected methods
 		//-----------------------------------------------------------------------------------------
@@ -84,40 +80,6 @@ package org.foomo.zugspitze.operations
 			this._total = total;
 			this._progress = progress;
 			return this.dispatchEvent(new ProgressOperationEvent(ProgressOperationEvent.OPERATION_PROGRESS, this));
-		}
-
-		//-----------------------------------------------------------------------------------------
-		// ~ Private methods
-		//-----------------------------------------------------------------------------------------
-
-		/**
-		 * @private
-		 */
-		private function addCallback(callback:Function, args:Array):IProgressOperation
-		{
-			var fnc:Function
-			var instance:Operation = this;
-
-			fnc = function(event:ProgressOperationEvent):void {
-				if (callback.length > args.length) args.unshift(event.operation.total);
-				if (callback.length > args.length) args.unshift(event.operation.progress);
-				callback.apply(instance, args);
-				instance.removeEventListener(ProgressOperationEvent.OPERATION_PROGRESS, fnc);
-			}
-			instance.addEventListener(ProgressOperationEvent.OPERATION_PROGRESS, fnc, false, 0, true);
-			return this;
-		}
-
-		//-----------------------------------------------------------------------------------------
-		// ~ Public static methods
-		//-----------------------------------------------------------------------------------------
-
-		/**
-		 *
-		 */
-		public static function create(operation:Class, ... args):IProgressOperation
-		{
-			return ClassUtil.createInstance(operation, args);
 		}
 	}
 }

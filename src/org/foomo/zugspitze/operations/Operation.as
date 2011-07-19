@@ -73,57 +73,6 @@ package org.foomo.zugspitze.operations
 			return this._error;
 		}
 
-		/**
-		 *
-		 */
-		public function addCompleteListener(listener:Function):IOperation
-		{
-			this.addEventListener(OperationEvent.OPERATION_COMPLETE, listener, false, 0, true);
-			return this;
-		}
-
-		/**
-		 *
-		 */
-		public function addCompleteCallback(callback:Function, ... args):IOperation
-		{
-			return this.addCallback(OperationEvent.OPERATION_COMPLETE, callback, args);
-		}
-
-		/**
-		 *
-		 */
-		public function chainOnComplete(operation:Class, ... args):IOperation
-		{
-			return this.addChain(OperationEvent.OPERATION_COMPLETE, operation ,args);
-		}
-
-		/**
-		 *
-		 */
-		public function addErrorListener(listener:Function):IOperation
-		{
-			this.addEventListener(OperationEvent.OPERATION_ERROR, listener, false, 0, true);
-			return this;
-		}
-
-		/**
-		 *
-		 */
-		public function addErrorCallback(callback:Function, ... args):IOperation
-		{
-			return this.addCallback(OperationEvent.OPERATION_ERROR, callback, args);
-		}
-
-		/**
-		 *
-		 */
-		public function chainOnError(operation:Class, ... args):IOperation
-		{
-			return this.addChain(OperationEvent.OPERATION_ERROR, operation, args);
-		}
-
-
 		//-----------------------------------------------------------------------------------------
 		// ~ Protected methods
 		//-----------------------------------------------------------------------------------------
@@ -144,58 +93,6 @@ package org.foomo.zugspitze.operations
 		{
 			if (error != null) this._error = error;
 			return this.dispatchEvent(new OperationEvent(OperationEvent.OPERATION_ERROR, this));
-		}
-
-		//-----------------------------------------------------------------------------------------
-		// ~ Private methods
-		//-----------------------------------------------------------------------------------------
-
-		/**
-		 * @private
-		 */
-		private function addCallback(type:String, callback:Function, args:Array):IOperation
-		{
-			var fnc:Function
-			var instance:Operation = this;
-
-			fnc = function(event:OperationEvent):void {
-				if (callback.length > args.length) args.unshift(event.operation[(type == OperationEvent.OPERATION_COMPLETE) ? 'result' : 'error']);
-				callback.apply(instance, args);
-				instance.removeEventListener(type, fnc);
-			}
-			instance.addEventListener(type, fnc, false, 0, true);
-			return this;
-		}
-
-		/**
-		 * @private
-		 */
-		private function addChain(type:String, operation:Class, args:Array):IOperation
-		{
-			var fnc:Function;
-			var instance:Operation = this;
-			var proxy:OperationProxy = new OperationProxy();
-
-			fnc = function(event:OperationEvent):void {
-				if (ClassUtil.getConstructorParameters(operation).length > args.length) args.unshift(event.operation[(type == OperationEvent.OPERATION_COMPLETE) ? 'result' : 'error']);
-				proxy.chain(ClassUtil.createInstance(operation, args));
-				instance.removeEventListener(type, fnc);
-			}
-
-			instance.addEventListener(type, fnc, false, 0, true);
-			return proxy;
-		}
-
-		//-----------------------------------------------------------------------------------------
-		// ~ Public static methods
-		//-----------------------------------------------------------------------------------------
-
-		/**
-		 *
-		 */
-		public static function create(operation:Class, ... args):IOperation
-		{
-			return ClassUtil.createInstance(operation, args);
 		}
 	}
 }
