@@ -52,7 +52,7 @@ package org.foomo.zugspitze.core
 
 		private static const ZUGSPITZE_INFO:Object = new Object
 		{
-			if (LogManager.isInfo()) trace('\n      ../\\\n   ../    |     ZUGSPITZE V.' + Zugspitze.VERSION + '\n  /        \\    www.foomo.org/zugspitze\n\n');
+			if (LogManager.isInfo()) trace('\n      ../\\\n   ../    |     ZUGSPITZE ' + Zugspitze.VERSION + '\n  /        \\    www.foomo.org/zugspitze\n\n');
 		}
 
 		//-----------------------------------------------------------------------------------------
