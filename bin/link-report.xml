@@ -25,22 +25,18 @@
       <dep id="org.foomo.zugspitze.operations:IOperation" />
       <dep id="AS3" />
     </script>
+    <script name="_3c86814ec28e2a422b3c38eaa2d9682e657b9fae34725a0772dc412249e471ab_flash_display_Sprite.as" mod="1312537729808" size="1095" optimizedsize="562">
+      <def id="_3c86814ec28e2a422b3c38eaa2d9682e657b9fae34725a0772dc412249e471ab_flash_display_Sprite" />
+      <pre id="flash.display:Sprite" />
+      <dep id="flash.system:Security" />
+      <dep id="AS3" />
+    </script>
     <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/operations/OperationChain.as" mod="1311078319000" size="3112" optimizedsize="1494">
       <def id="org.foomo.zugspitze.operations:OperationChain" />
       <pre id="org.foomo.core:EventDispatcherChain" />
       <dep id="AS3" />
       <dep id="org.foomo.zugspitze.events:ProgressOperationEvent" />
       <dep id="flash.utils:flash_proxy" />
-      <dep id="org.foomo.zugspitze.events:OperationEvent" />
-    </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/utils/OperationUtil.as" mod="1310829460000" size="1741" optimizedsize="1268">
-      <def id="org.foomo.zugspitze.utils:OperationUtil" />
-      <pre id="Object" />
-      <dep id="org.foomo.zugspitze.operations:IOperation" />
-      <dep id="AS3" />
-      <dep id="org.foomo.utils:ClassUtil" />
-      <dep id="org.foomo.utils:StringUtil" />
-      <dep id="org.foomo.core:IUnload" />
       <dep id="org.foomo.zugspitze.events:OperationEvent" />
     </script>
     <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/managers/StatusManager.as" mod="1309943180000" size="1819" optimizedsize="868">
@@ -78,12 +74,6 @@
       <dep id="Error" />
       <dep id="org.foomo.zugspitze.core:IApplication" />
     </script>
-    <script name="_c985a6f2796de5063d365fa20bcd4e9a7ec7fbe20fb946980a1c01556eddea47_flash_display_Sprite.as" mod="1311193932300" size="1095" optimizedsize="562">
-      <def id="_c985a6f2796de5063d365fa20bcd4e9a7ec7fbe20fb946980a1c01556eddea47_flash_display_Sprite" />
-      <pre id="flash.display:Sprite" />
-      <dep id="flash.system:Security" />
-      <dep id="AS3" />
-    </script>
     <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/commands/ICommand.as" mod="1309620473000" size="505" optimizedsize="225">
       <def id="org.foomo.zugspitze.commands:ICommand" />
       <pre id="flash.events:IEventDispatcher" />
@@ -96,22 +86,15 @@
       <pre id="Object" />
       <dep id="AS3" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/events/UnhandledOperationEvent.as" mod="1310829437000" size="1323" optimizedsize="729">
-      <def id="org.foomo.zugspitze.events:UnhandledOperationEvent" />
-      <pre id="flash.events:Event" />
-      <dep id="org.foomo.zugspitze.operations:IOperation" />
-      <dep id="AS3" />
-    </script>
     <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/core/ISetBusyStatus.as" mod="1309624705000" size="503" optimizedsize="200">
       <def id="org.foomo.zugspitze.core:ISetBusyStatus" />
       <pre id="Object" />
       <dep id="AS3" />
     </script>
-    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/core/ZugspitzeModel.as" mod="1310830724000" size="672" optimizedsize="234">
+    <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/core/ZugspitzeModel.as" mod="1312355923000" size="443" optimizedsize="234">
       <def id="org.foomo.zugspitze.core:ZugspitzeModel" />
       <pre id="flash.events:EventDispatcher" />
       <dep id="AS3" />
-      <dep id="org.foomo.zugspitze.events:OperationEvent" />
     </script>
     <script name="/Users/franklin/Workspaces/flex4/zugspitze_core/src/org/foomo/zugspitze/operations/ProgressOperation.as" mod="1311078174000" size="1156" optimizedsize="579">
       <def id="org.foomo.zugspitze.operations:ProgressOperation" />
@@ -289,7 +272,6 @@
     <ext id="org.foomo.managers:LogManager" />
     <ext id="flash.events:IEventDispatcher" />
     <ext id="org.foomo.utils:DisplayObjectUtil" />
-    <ext id="org.foomo.utils:StringUtil" />
     <ext id="trace" />
     <ext id="flash.events:EventDispatcher" />
     <ext id="org.foomo.core:Managers" />

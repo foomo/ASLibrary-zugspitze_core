@@ -59,7 +59,7 @@ package org.foomo.zugspitze.core
 		// ~ Constants
 		//-----------------------------------------------------------------------------------------
 
-		public static const VERSION:String = 'alpha-1.0';
+		public static const VERSION:String = 'alpha-1.0.1';
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
