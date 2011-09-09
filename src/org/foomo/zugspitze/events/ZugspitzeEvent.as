@@ -29,11 +29,12 @@ package org.foomo.zugspitze.events
 		// ~ Constants
 		//-----------------------------------------------------------------------------------------
 
-		public static const ZUGSPITZE_CONTROLLER_CHANGED:String 	= 'zugspitzeControllerChanged';
-		public static const ZUGSPITZE_MODEL_CHANGED:String 			= 'zugspitzeModelChanged';
-		public static const ZUGSPITZE_VIEW_CHANGED:String 			= 'zugspitzeViewChanged';
-		public static const ZUGSPITZE_VIEW_REMOVE:String 			= 'zugspitzeViewRemove';
-		public static const ZUGSPITZE_VIEW_ADD:String 				= 'zugspitzeViewAdd';
+		public static const ZUGSPITZE_CONTROLLER_CHANGE:String 	= "zugspitzeControllerChange";
+		public static const ZUGSPITZE_COMPLETE:String 		= "zugspitzeComplete";
+		public static const ZUGSPITZE_MODEL_CHANGE:String 			= "zugspitzeModelChange";
+		public static const ZUGSPITZE_VIEW_CHANGE:String 			= "zugspitzeViewChange";
+		public static const ZUGSPITZE_VIEW_REMOVE:String 			= "zugspitzeViewRemove";
+		public static const ZUGSPITZE_VIEW_ADD:String 				= "zugspitzeViewAdd";
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor

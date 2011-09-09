@@ -55,15 +55,15 @@ package org.foomo.zugspitze.core
 		{
 			var application:IApplication;
 
-			var modelChangedHandler:Function = function(event:ZugspitzeEvent):void {
+			var modelChangeHandler:Function = function(event:ZugspitzeEvent):void {
 				viewComposite['model'] = application.model;
 			}
 
-			var zugspitzeControllerChangedHandler:Function = function(event:ZugspitzeEvent):void {
+			var zugspitzeControllerChangeHandler:Function = function(event:ZugspitzeEvent):void {
 				viewComposite['controller'] = application.controller;
 			}
 
-			var zugspitzeViewChangedHandler:Function = function(event:ZugspitzeEvent):void {
+			var zugspitzeViewChangeHandler:Function = function(event:ZugspitzeEvent):void {
 				var app:IApplication = getApplication(viewComposite);
 				if (app && app != application) throw new Error('Wow, you just found a usecase I did not expect!');
 				if (app) return;
@@ -72,9 +72,9 @@ package org.foomo.zugspitze.core
 				viewComposite['model'] = null;
 				viewComposite['controller'] = null;
 				viewComposite['application'] = null;
-				application.removeEventListener(ZugspitzeEvent.ZUGSPITZE_VIEW_CHANGED,  zugspitzeViewChangedHandler);
-				application.removeEventListener(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGED,  modelChangedHandler);
-				application.removeEventListener(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGED,  zugspitzeControllerChangedHandler);
+				application.removeEventListener(ZugspitzeEvent.ZUGSPITZE_VIEW_CHANGE,  zugspitzeViewChangeHandler);
+				application.removeEventListener(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGE,  modelChangeHandler);
+				application.removeEventListener(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGE,  zugspitzeControllerChangeHandler);
 				application = null;
 			}
 
@@ -84,13 +84,13 @@ package org.foomo.zugspitze.core
 				viewComposite['view'] = application.view;
 				viewComposite['model'] = application.model;
 				viewComposite['controller'] = application.controller;
-				application.addEventListener(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGED,  modelChangedHandler, false, 0, true);
-				application.addEventListener(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGED,  zugspitzeControllerChangedHandler, false, 0, true);
+				application.addEventListener(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGE,  modelChangeHandler, false, 0, true);
+				application.addEventListener(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGE,  zugspitzeControllerChangeHandler, false, 0, true);
 			}
 
 			var zugspitzeViewRemoveHandler:Function = function(event:ZugspitzeEvent):void {
-				application.removeEventListener(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGED,  modelChangedHandler);
-				application.removeEventListener(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGED,  zugspitzeControllerChangedHandler);
+				application.removeEventListener(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGE,  modelChangeHandler);
+				application.removeEventListener(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGE,  zugspitzeControllerChangeHandler);
 				// unset all values
 				viewComposite['view'] = null;
 				viewComposite['model'] = null;
@@ -100,7 +100,8 @@ package org.foomo.zugspitze.core
 			}
 
 			var addedToStageHandler:Function = function(event:Event):void {
-				if (viewComposite['application']) return;
+				// @todo had this in here as the addedToStage event in mx is beeing called more than once.
+				//if (viewComposite['application']) return;
 
 				application = getApplication(viewComposite);
 				if (application) {
@@ -108,9 +109,9 @@ package org.foomo.zugspitze.core
 					viewComposite['view'] = application.view;
 					viewComposite['model'] = application.model;
 					viewComposite['controller'] = application.controller;
-					application.addEventListener(ZugspitzeEvent.ZUGSPITZE_VIEW_CHANGED, zugspitzeViewChangedHandler, false, 0, true);
-					application.addEventListener(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGED,  modelChangedHandler, false, 0, true);
-					application.addEventListener(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGED,  zugspitzeControllerChangedHandler, false, 0, true);
+					application.addEventListener(ZugspitzeEvent.ZUGSPITZE_VIEW_CHANGE, zugspitzeViewChangeHandler, false, 0, true);
+					application.addEventListener(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGE,  modelChangeHandler, false, 0, true);
+					application.addEventListener(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGE,  zugspitzeControllerChangeHandler, false, 0, true);
 				}
 			}
 

@@ -21,8 +21,8 @@ package org.foomo.zugspitze.managers
 	import flash.utils.getQualifiedClassName;
 	import flash.utils.getTimer;
 
-	import org.foomo.core.IUnload;
 	import org.foomo.managers.LogManager;
+	import org.foomo.memory.IUnload;
 	import org.foomo.utils.ClassUtil;
 	import org.foomo.zugspitze.commands.Command;
 	import org.foomo.zugspitze.commands.CommandHistory;
@@ -235,7 +235,7 @@ package org.foomo.zugspitze.managers
 			this._pendingCommand = Command(command);
 			this._pendingCommand.addEventListener(CommandEvent.COMMAND_COMPLETE, this.onExecuteCommand);
 			this._pendingCommand.addEventListener(CommandEvent.COMMAND_ERROR, this.commandErrorEventHandler);
-			if (LogManager.isDebug()) LogManager.debug(this, 'Executing command :: ' + getQualifiedClassName(this._pendingCommand));
+			if (LogManager.isDebug()) LogManager.debug(this, 'Executing command :: ' + ClassUtil.getQualifiedName(this._pendingCommand));
 			if (this._pendingCommand.setBusyStatus) this.setBusyStatus();
 			if (LogManager.isDebug()) this._time = getTimer();
 			command.execute();
@@ -247,7 +247,7 @@ package org.foomo.zugspitze.managers
 		 */
 		private function onExecuteCommand(event:CommandEvent):void
 		{
-			if (LogManager.isDebug()) LogManager.debug(this, 'Executed command  :: ' + this._pendingCommand.toString() + ' [' + (getTimer() - this._time) + ' ms]');
+			if (LogManager.isDebug()) LogManager.debug(this, 'Executed command  :: ' + ClassUtil.getQualifiedName(this._pendingCommand) + ' [' + (getTimer() - this._time) + ' ms]');
 			this._pendingCommand.removeEventListener(CommandEvent.COMMAND_COMPLETE, this.onExecuteCommand);
 			this._pendingCommand.removeEventListener(CommandEvent.COMMAND_ERROR, this.commandErrorEventHandler);
 			if (this._pendingCommand.setBusyStatus) this.removeBusyStatus();

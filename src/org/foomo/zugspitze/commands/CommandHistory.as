@@ -16,7 +16,7 @@
  */
 package org.foomo.zugspitze.commands
 {
-	import org.foomo.core.IUnload;
+	import org.foomo.memory.IUnload;
 	import org.foomo.utils.ClassUtil;
 
 	[ExcludeClass]

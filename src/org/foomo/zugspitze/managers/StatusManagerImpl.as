@@ -16,13 +16,11 @@
  */
 package org.foomo.zugspitze.managers
 {
-	import org.foomo.utils.ArrayUtil;
-	import org.foomo.utils.ClassUtil;
-
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
-	import flash.utils.getQualifiedClassName;
+
 	import org.foomo.managers.LogManager;
+	import org.foomo.utils.ClassUtil;
 
 	[Event(name="change", type="flash.events.Event")]
 	//[ExcludeClass]
@@ -123,7 +121,7 @@ package org.foomo.zugspitze.managers
 			if (this._stack.length == 0) return;
 
 			var aliasName:String 	= ClassUtil.getQualifiedName(instance);
-			var itemIndex:int 		= ArrayUtil.getItemIndex(aliasName, this._stack);
+			var itemIndex:int 		= this._stack.indexOf(aliasName);
 
 			if (itemIndex < 0) {
 				if (LogManager.isError()) LogManager.error(this, 'Instance not found in stack');

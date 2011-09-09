@@ -21,10 +21,11 @@ package org.foomo.zugspitze.core
 	import flash.display.DisplayObjectContainer;
 	import flash.events.IEventDispatcher;
 
-	[Event(name="zugspitzeControllerChanged", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
-	[Event(name="zugspitzeModelChanged", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
-	[Event(name="zugspitzeViewChanged", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
+	[Event(name="zugspitzeControllerChange", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
+	[Event(name="zugspitzeModelChange", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
+	[Event(name="zugspitzeViewChange", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
 	[Event(name="zugspitzeViewRemove", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
+	[Event(name="zugspitzeComplete", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
 	[Event(name="zugspitzeViewAdd", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
 
 	/**

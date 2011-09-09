@@ -25,6 +25,8 @@ package org.foomo.zugspitze.core
 	import org.foomo.core.Managers;
 	import org.foomo.managers.LogManager;
 	import org.foomo.managers.LogManagerImpl;
+	import org.foomo.utils.CallLaterUtil;
+	import org.foomo.utils.ClassUtil;
 	import org.foomo.utils.DisplayObjectContainerUtil;
 	import org.foomo.zugspitze.events.ZugspitzeEvent;
 	import org.foomo.zugspitze.managers.CommandManagerImpl;
@@ -33,9 +35,10 @@ package org.foomo.zugspitze.core
 
 	use namespace zugspitze_internal;
 
-	[Event(name="zugspitzeControllerChanged", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
-	[Event(name="zugspitzeModelChanged", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
-	[Event(name="zugspitzeViewChanged", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
+	[Event(name="zugspitzeControllerChange", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
+	[Event(name="zugspitzeModelChange", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
+	[Event(name="zugspitzeViewChange", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
+	[Event(name="zugspitzeComplete", type="org.foomo.zugspitze.events.ZugspitzeEvent")]
 
 	/**
 	 * Heart of the MCV framework
@@ -120,7 +123,7 @@ package org.foomo.zugspitze.core
 		public function Zugspitze(application:IApplication)
 		{
 			this._application = application;
-			DisplayObject(this._application).addEventListener(Event.FRAME_CONSTRUCTED, this.application_frameConstructedHandler, false, 0, true);
+			CallLaterUtil.addCallback(this.application_updateHandler);
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -133,6 +136,7 @@ package org.foomo.zugspitze.core
 		public function invalidateProperties():void
 		{
 			this._invalidProperties = true;
+			CallLaterUtil.addCallback(this.application_updateHandler);
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -197,7 +201,8 @@ package org.foomo.zugspitze.core
 			if (this._controller) this._controller.zugspitze = null;
 			this._controller = value;
 			if (this._controller) this._controller.zugspitze = this;
-			this.dispatchEvent(new ZugspitzeEvent(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGED));
+			this.dispatchEvent(new ZugspitzeEvent(ZugspitzeEvent.ZUGSPITZE_CONTROLLER_CHANGE));
+			this.invalidateProperties();
 		}
 		public function get controller():ZugspitzeController
 		{
@@ -211,7 +216,8 @@ package org.foomo.zugspitze.core
 		{
 			if (this._model == value) return;
 			this._model = value;
-			this.dispatchEvent(new ZugspitzeEvent(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGED));
+			this.dispatchEvent(new ZugspitzeEvent(ZugspitzeEvent.ZUGSPITZE_MODEL_CHANGE));
+			this.invalidateProperties();
 		}
 		public function get model():ZugspitzeModel
 		{
@@ -235,7 +241,8 @@ package org.foomo.zugspitze.core
 				DisplayObjectContainerUtil.addChild(this._view, DisplayObjectContainer(this._application));
 				this._view.dispatchEvent(new ZugspitzeEvent(ZugspitzeEvent.ZUGSPITZE_VIEW_ADD));
 			}
-			this.dispatchEvent(new ZugspitzeEvent(ZugspitzeEvent.ZUGSPITZE_VIEW_CHANGED));
+			this.dispatchEvent(new ZugspitzeEvent(ZugspitzeEvent.ZUGSPITZE_VIEW_CHANGE));
+			this.invalidateProperties();
 		}
 		public function get view():DisplayObject
 		{
@@ -252,18 +259,23 @@ package org.foomo.zugspitze.core
 		protected function commitProperties():void
 		{
 			if (this._modelClassChanged) {
-				this.model = new this._modelClass;
+				if (!this.model || ClassUtil.getClass(this.model) != this._modelClass) this.model = new this._modelClass;
 				this._modelClassChanged = false;
 			}
 
 			if (this._controllerClassChanged) {
-				this.controller = new this._controllerClass;
+				if (!this.controller || ClassUtil.getClass(this.controller) != this._controllerClass) this.controller = new this._controllerClass;
 				this._controllerClassChanged = false;
 			}
 
 			if (this._viewClassChanged) {
-				this.view = new this._viewClass;
+				if (!this.view || ClassUtil.getClass(this.view) != this._viewClass) this.view = new this._viewClass;
 				this._viewClassChanged = false;
+			}
+
+			if (!this._complete && this.controller && this.view && this.model) {
+				this.dispatchEvent(new ZugspitzeEvent(ZugspitzeEvent.ZUGSPITZE_COMPLETE));
+				this._complete = true;
 			}
 		}
 
@@ -274,7 +286,7 @@ package org.foomo.zugspitze.core
 		/**
 		 *
 		 */
-		private function application_frameConstructedHandler(event:Event):void
+		private function application_updateHandler():void
 		{
 			if (this._invalidProperties) {
 				this.commitProperties();
