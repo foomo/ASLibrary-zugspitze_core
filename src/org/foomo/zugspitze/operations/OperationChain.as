@@ -68,7 +68,7 @@ package org.foomo.zugspitze.operations
 		public function addOperationErrorListener(listener:Function):OperationChain
 		{
 			if (LogManager.isDebug()) super.removeEventListener(OperationEvent.OPERATION_ERROR, this.debug_unhandledOperationEvent);
-			return super.addEventListener(OperationEvent.OPERATION_COMPLETE, listener) as OperationChain;
+			return super.addEventListener(OperationEvent.OPERATION_ERROR, listener) as OperationChain;
 		}
 
 		/**
@@ -147,7 +147,7 @@ package org.foomo.zugspitze.operations
 		 */
 		public function unloadOnOperationError():OperationChain
 		{
-			return super.unloadOnEvent(OperationEvent.OPERATION_COMPLETE) as OperationChain;
+			return super.unloadOnEvent(OperationEvent.OPERATION_ERROR) as OperationChain;
 		}
 
 		/**
