@@ -62,7 +62,7 @@ package org.foomo.zugspitze.core
 		// ~ Constants
 		//-----------------------------------------------------------------------------------------
 
-		public static const VERSION:String = 'alpha-1.0.1';
+		public static const VERSION:String = '0.2.0-alpha';
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Variables
@@ -256,7 +256,7 @@ package org.foomo.zugspitze.core
 		/**
 		 *
 		 */
-		protected function commitProperties():void
+		zugspitze_internal function commitProperties():void
 		{
 			if (this._modelClassChanged) {
 				if (!this.model || ClassUtil.getClass(this.model) != this._modelClass) this.model = new this._modelClass;
