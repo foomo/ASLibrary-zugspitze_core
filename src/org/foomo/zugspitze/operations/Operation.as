@@ -18,6 +18,7 @@ package org.foomo.zugspitze.operations
 {
 	import flash.events.EventDispatcher;
 
+	import org.foomo.memory.IUnload;
 	import org.foomo.utils.ClassUtil;
 	import org.foomo.zugspitze.events.OperationEvent;
 
@@ -30,7 +31,7 @@ package org.foomo.zugspitze.operations
 	 * @author  franklin <franklin@weareinteractive.com>
 	 * @todo	Add progress operation
 	 */
-	public class Operation extends EventDispatcher implements IOperation
+	public class Operation extends EventDispatcher implements IOperation, IUnload
 	{
 		//-----------------------------------------------------------------------------------------
 		// ~ Variabels
@@ -56,6 +57,15 @@ package org.foomo.zugspitze.operations
 		//-----------------------------------------------------------------------------------------
 		// ~ Public methods
 		//-----------------------------------------------------------------------------------------
+
+		/**
+		 *
+		 */
+		public function unload():void
+		{
+			this._error = null;
+			this._result = null;
+		}
 
 		/**
 		 *

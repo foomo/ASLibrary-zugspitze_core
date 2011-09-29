@@ -33,7 +33,6 @@ package org.foomo.zugspitze.operations
 	 */
 	dynamic public class OperationChain extends EventDispatcherChain
 	{
-
 		//-----------------------------------------------------------------------------------------
 		// ~ Constructor
 		//-----------------------------------------------------------------------------------------

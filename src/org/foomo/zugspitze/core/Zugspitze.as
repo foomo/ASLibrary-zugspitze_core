@@ -25,6 +25,7 @@ package org.foomo.zugspitze.core
 	import org.foomo.core.Managers;
 	import org.foomo.managers.LogManager;
 	import org.foomo.managers.LogManagerImpl;
+	import org.foomo.memory.Unloader;
 	import org.foomo.utils.CallLaterUtil;
 	import org.foomo.utils.ClassUtil;
 	import org.foomo.utils.DisplayObjectContainerUtil;
@@ -55,7 +56,10 @@ package org.foomo.zugspitze.core
 
 		private static const ZUGSPITZE_INFO:Object = new Object
 		{
+			// version info
 			if (LogManager.isInfo()) trace('\n      ../\\\n   ../    |     ZUGSPITZE ' + Zugspitze.VERSION + '\n  /        \\    www.foomo.org/zugspitze\n\n');
+			// add all default foomo unloader
+			Unloader.addAll();
 		}
 
 		//-----------------------------------------------------------------------------------------
