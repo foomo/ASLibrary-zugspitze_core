@@ -222,7 +222,24 @@ package org.foomo.zugspitze.managers
 			this.redoCommand(this._commandHistory.next);
 			this.dispatchEvent(new Event('update'));
 		}
-
+		
+		/**
+		 * Clearing all stacks and ignoring possible pending command
+		 */
+		public function clear():void
+		{
+			if (this._pendingCommand) {
+				this._pendingCommand.removeEventListener(CommandEvent.COMMAND_COMPLETE, this.onUndoCommand);
+				this._pendingCommand.removeEventListener(CommandEvent.COMMAND_COMPLETE, this.onRedoCommand);
+				this._pendingCommand.removeEventListener(CommandEvent.COMMAND_COMPLETE, this.onExecuteCommand);
+				this._pendingCommand.removeEventListener(CommandEvent.COMMAND_ERROR, this.commandErrorEventHandler);
+				this._pendingCommand = null;
+			}
+			this._commandHistory.clear();
+			this._commandQueue.clear();
+			this.removeBusyStatus(true);
+		}
+		
 		//-----------------------------------------------------------------------------------------
 		// ~ Execute command
 		//-----------------------------------------------------------------------------------------

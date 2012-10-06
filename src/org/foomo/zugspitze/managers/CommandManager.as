@@ -153,6 +153,14 @@ package org.foomo.zugspitze.managers
 		{
 			impl.redo();
 		}
+		
+		/**
+		 * Clear the command mananger
+		 */
+		public static function clear():void
+		{
+			_impl.clear();
+		}
 
 		/**
 		 * Add event listner

@@ -91,5 +91,10 @@ package org.foomo.zugspitze.managers
 		 * Redo command in history
 		 */
 		function redo():void
+
+		/**
+		 * Clear all histroy and pending commands
+		 */
+		function clear():void
 	}
 }
