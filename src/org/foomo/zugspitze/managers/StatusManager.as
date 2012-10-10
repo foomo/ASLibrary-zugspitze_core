@@ -99,6 +99,14 @@ package org.foomo.zugspitze.managers
 		{
 			impl.removeBusyStatus(instance);
 		}
+		
+		/**
+		 * Remove all busy cursors
+		 */
+		public static function removeAllBusyStatus():void
+		{
+			_impl.removeAllBusyStatus();
+		}
 
 		/**
 		 * @param type

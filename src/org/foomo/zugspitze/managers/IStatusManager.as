@@ -50,5 +50,10 @@ package org.foomo.zugspitze.managers
 		 * @param instance			Caller instance as identifier
 		 */
 		function removeBusyStatus(instance:Object):void;
+
+		/**
+		 * Remove all busy cursor
+		 */
+		function removeAllBusyStatus():void;
 	}
 }

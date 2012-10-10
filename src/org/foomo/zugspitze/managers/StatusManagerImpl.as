@@ -133,5 +133,13 @@ package org.foomo.zugspitze.managers
 				}
 			}
 		}
+		
+		/**
+		 * Remove all busy cursor
+		 */
+		public function removeAllBusyStatus():void
+		{
+			while (this._stack.length > 0) this.removeBusyStatus(this._stack.shift());
+		}		
 	}
 }
