@@ -17,7 +17,7 @@
 package org.foomo.zugspitze.operations
 {
 	import flash.utils.flash_proxy;
-
+	
 	import org.foomo.core.EventDispatcherChain;
 	import org.foomo.managers.LogManager;
 	import org.foomo.utils.ClassUtil;
@@ -77,6 +77,8 @@ package org.foomo.zugspitze.operations
 		{
 			return super.addEventListener(ProgressOperationEvent.OPERATION_PROGRESS, listener) as OperationChain;
 		}
+		
+		// --- addEventCallback -------------------------------------------------------------------
 
 		/**
 		 *
@@ -107,6 +109,8 @@ package org.foomo.zugspitze.operations
 			return (super.addEventCallback as Function).apply(this, rest);
 		}
 
+		// --- setOn ------------------------------------------------------------------------------
+		
 		/**
 		 *
 		 */
@@ -132,6 +136,49 @@ package org.foomo.zugspitze.operations
 		{
 			return super.setOnEvent(ProgressOperationEvent.OPERATION_PROGRESS, host, parameter, eventArg, customArg) as OperationChain;
 		}
+		
+		// --- storeVariable ----------------------------------------------------------------------
+		
+		/**
+		 * Store a local variable for later use for given event type
+		 * 
+		 * @param name The local variable name
+		 * @param eventArg Name of the event property to read in
+		 * @param customArg Custom variable value
+		 * @return The current chain instance
+		 */
+		public function storeVariableOnOperationComplete(name:String, eventArg:String=null, customArg:*=null):OperationChain
+		{
+			return super.storeVariable(OperationEvent.OPERATION_COMPLETE, name, eventArg, customArg) as OperationChain
+		}
+		
+		/**
+		 * Store a local variable for later use for given event type
+		 * 
+		 * @param name The local variable name
+		 * @param eventArg Name of the event property to read in
+		 * @param customArg Custom variable value
+		 * @return The current chain instance
+		 */
+		public function storeVariableOnOperationError(name:String, eventArg:String=null, customArg:*=null):OperationChain
+		{
+			return super.storeVariable(OperationEvent.OPERATION_ERROR, name, eventArg, customArg) as OperationChain
+		}
+		
+		/**
+		 * Store a local variable for later use for given event type
+		 * 
+		 * @param name The local variable name
+		 * @param eventArg Name of the event property to read in
+		 * @param customArg Custom variable value
+		 * @return The current chain instance
+		 */
+		public function storeVariableOnOperationProgress(name:String, eventArg:String=null, customArg:*=null):OperationChain
+		{
+			return super.storeVariable(ProgressOperationEvent.OPERATION_PROGRESS, name, eventArg, customArg) as OperationChain
+		}
+		
+		// --- unload -----------------------------------------------------------------------------
 
 		/**
 		 *
@@ -156,43 +203,66 @@ package org.foomo.zugspitze.operations
 		{
 			return super.unloadOnEvent(ProgressOperationEvent.OPERATION_PROGRESS) as OperationChain;
 		}
+		
+		// --- chain ------------------------------------------------------------------------------
 
 		/**
-		 *
+		 * Chain a new dispatcher operation after receiving the event 
+		 * 
+		 * @param dispatcher The Chaining dispatcher class
+		 * @param eventArgs Event parameters that should be passed as arguements to the dispatcher
+		 * @param customArgs Custom arguements to be passed to the dispatcher
+		 * @return Dispatcher proxy
 		 */
-		public function chainOnOperationComplete(dispatcher:Class, eventArgs:Array=null, ... rest):OperationChain
+		public function chainOnOperationComplete(dispatcher:Class, eventArgs:Array=null, ... customArgs):OperationChain
 		{
 			if (LogManager.isDebug()) super.removeEventListener(OperationEvent.OPERATION_COMPLETE, this.debug_unhandledOperationEvent);
-			rest.unshift(OperationEvent.OPERATION_COMPLETE, dispatcher, eventArgs);
-			return (super.chainOn as Function).apply(this, rest);
+			customArgs.unshift(OperationEvent.OPERATION_COMPLETE, dispatcher, eventArgs);
+			return (super.chainOn as Function).apply(this, customArgs);
 		}
 
 		/**
-		 *
+		 * Chain a new dispatcher operation after receiving the event 
+		 * 
+		 * @param dispatcher The Chaining dispatcher class
+		 * @param eventArgs Event parameters that should be passed as arguements to the dispatcher
+		 * @param customArgs Custom arguements to be passed to the dispatcher
+		 * @return Dispatcher proxy
 		 */
-		public function chainOnOperationError(dispatcher:Class, eventArgs:Array=null, ... rest):OperationChain
+		public function chainOnOperationError(dispatcher:Class, eventArgs:Array=null, ... customArgs):OperationChain
 		{
 			if (LogManager.isDebug()) super.removeEventListener(OperationEvent.OPERATION_ERROR, this.debug_unhandledOperationEvent);
-			rest.unshift(OperationEvent.OPERATION_ERROR, dispatcher, eventArgs);
-			return (super.chainOn as Function).apply(this, rest);
+			customArgs.unshift(OperationEvent.OPERATION_ERROR, dispatcher, eventArgs);
+			return (super.chainOn as Function).apply(this, customArgs);
 		}
 
 		/**
-		 *
+		 * Chain a new dispatcher operation after receiving the event 
+		 * 
+		 * @param dispatcher The Chaining dispatcher class
+		 * @param eventArgs Event parameters that should be passed as arguements to the dispatcher
+		 * @param customArgs Custom arguements to be passed to the dispatcher
+		 * @return Dispatcher proxy
 		 */
-		public function chainOnOperationProgress(dispatcher:Class, eventArgs:Array=null, ... rest):OperationChain
+		public function chainOnOperationProgress(dispatcher:Class, eventArgs:Array=null, ... customArgs):OperationChain
 		{
-			rest.unshift(ProgressOperationEvent.OPERATION_PROGRESS, dispatcher, eventArgs);
-			return (super.chainOn as Function).apply(this, rest);
+			customArgs.unshift(ProgressOperationEvent.OPERATION_PROGRESS, dispatcher, eventArgs);
+			return (super.chainOn as Function).apply(this, customArgs);
 		}
 
 		//-----------------------------------------------------------------------------------------
 		// ~ Private eventhandler
 		//-----------------------------------------------------------------------------------------
 
+		/**
+		 * Warn and unload if we receive an unhandled event
+		 * 
+		 * @param event
+		 */
 		private function debug_unhandledOperationEvent(event:OperationEvent):void
 		{
 			LogManager.warn(this, 'Unhandled {0}::{1} event!', ClassUtil.getQualifiedName(event.target), event.type);
+			this.unload();
 		}
 
 		//-----------------------------------------------------------------------------------------
@@ -206,6 +276,7 @@ package org.foomo.zugspitze.operations
 		{
 			if (LogManager.isDebug()) LogManager.debug(EventDispatcherChain, 'Creating OperationChain :: {0}', ClassUtil.getQualifiedName(dispatcher));
 			var ret:OperationChain = new OperationChain();
+			EventDispatcherChain.resetVariables();
 			return ret.setDispatcher(dispatcher, rest) as OperationChain;
 		}
 	}
