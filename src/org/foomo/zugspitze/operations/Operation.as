@@ -150,7 +150,7 @@ package org.foomo.zugspitze.operations
 		private function dispatchAsyncOperationErrorEvent_callbackHandler(error:*=null):void
 		{
 			CallLaterUtil.removeCallback(this.dispatchAsyncOperationErrorEvent_callbackHandler);
-			this.dispatchOperationErrorEvent(result);
+			this.dispatchOperationErrorEvent(error);
 		}
 	}
 }

@@ -21,6 +21,7 @@ package org.foomo.zugspitze.operations
 	import org.foomo.core.EventDispatcherChain;
 	import org.foomo.managers.LogManager;
 	import org.foomo.utils.ClassUtil;
+	import org.foomo.utils.DebugUtil;
 	import org.foomo.zugspitze.events.OperationEvent;
 	import org.foomo.zugspitze.events.ProgressOperationEvent;
 
@@ -185,6 +186,7 @@ package org.foomo.zugspitze.operations
 		 */
 		public function unloadOnOperationComplete():OperationChain
 		{
+			if (LogManager.isDebug()) super.removeEventListener(OperationEvent.OPERATION_COMPLETE, this.debug_unhandledOperationEvent);
 			return super.unloadOnEvent(OperationEvent.OPERATION_COMPLETE) as OperationChain;
 		}
 
@@ -193,6 +195,7 @@ package org.foomo.zugspitze.operations
 		 */
 		public function unloadOnOperationError():OperationChain
 		{
+			if (LogManager.isDebug()) super.removeEventListener(OperationEvent.OPERATION_ERROR, this.debug_unhandledOperationEvent);
 			return super.unloadOnEvent(OperationEvent.OPERATION_ERROR) as OperationChain;
 		}
 
@@ -201,6 +204,7 @@ package org.foomo.zugspitze.operations
 		 */
 		public function unloadOnOperationProgress():OperationChain
 		{
+			if (LogManager.isDebug()) super.removeEventListener(ProgressOperationEvent.OPERATION_PROGRESS, this.debug_unhandledOperationEvent);
 			return super.unloadOnEvent(ProgressOperationEvent.OPERATION_PROGRESS) as OperationChain;
 		}
 		
@@ -261,7 +265,15 @@ package org.foomo.zugspitze.operations
 		 */
 		private function debug_unhandledOperationEvent(event:OperationEvent):void
 		{
-			LogManager.warn(this, 'Unhandled {0}::{1} event!', ClassUtil.getQualifiedName(event.target), event.type);
+			switch (event.type) {
+				case OperationEvent.OPERATION_COMPLETE:
+				case ProgressOperationEvent.OPERATION_PROGRESS:
+					LogManager.warn(this, 'Unhandled {0}::{1} event!', ClassUtil.getQualifiedName(event.target), event.type);
+					break;
+				case OperationEvent.OPERATION_ERROR:
+					LogManager.warn(this, 'Unhandled {0}::{1} event!\n{2}', ClassUtil.getQualifiedName(event.target), event.type, DebugUtil.export(event.operation.error));
+					break;
+			}
 			this.unload();
 		}
 
